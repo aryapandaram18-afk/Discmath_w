@@ -1,0 +1,2256 @@
+<!-- hello  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiscMath Companion - Interactive Discrete Mathematics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="images/logo.svg">
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body class="bg-gray-50">
+    <!-- Landing Page -->
+    <div id="landingPage" class="gradient-bg min-h-screen">
+        <!-- Header -->
+        <nav class="p-6 relative z-50">
+            <div class="flex justify-between items-center max-w-6xl mx-auto">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-white text-xl font-semibold">DiscMath Companion</span>
+                </div>
+
+                <div class="flex items-center space-x-4 relative z-50">
+                    <button onclick="showSignIn();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                        </svg>
+                        <span>Sign In</span>
+                    </button>
+                    <button onclick="showSignUp();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                        </svg>
+                        <span>Sign Up</span>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="flex flex-col items-center justify-center min-h-screen px-6 -mt-20 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <div
+                        class="w-24 h-24 mx-auto mb-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white border-opacity-30">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 slide-in-left">
+                    <span class="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                        DiscMath Companion
+                    </span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto slide-in-right leading-relaxed">
+                    Your comprehensive guide to mastering discrete mathematics with interactive learning and practice
+                    problems
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 fade-in">
+                    <button onclick="showSignIn();"
+                        class="primary-btn text-white px-10 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <span>Start Learning</span>
+                    </button>
+                    <button onclick="continueAsGuest();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-10 py-4 rounded-xl text-lg font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <span>Try as Guest</span>
+                    </button>
+                </div>
+
+                <!-- Feature highlights -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto fade-in">
+                    <div
+                        class="bg-white bg-opacity-15 backdrop-blur-md rounded-2xl p-8 border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-3">Interactive Learning</h3>
+                        <p class="text-blue-100 leading-relaxed">Comprehensive topics with clear explanations and
+                            examples</p>
+                    </div>
+                    <div
+                        class="bg-white bg-opacity-15 backdrop-blur-md rounded-2xl p-8 border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-3">Practice Problems</h3>
+                        <p class="text-blue-100 leading-relaxed">Test your understanding with carefully crafted problems
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white bg-opacity-15 backdrop-blur-md rounded-2xl p-8 border border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-3">Progress Tracking</h3>
+                        <p class="text-blue-100 leading-relaxed">Monitor your learning journey and achievements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why DiscMath Companion Section -->
+        <div class="bg-white py-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Why Choose DiscMath Companion?</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Discover the key advantages that make learning discrete mathematics more accessible and
+                        engaging.
+                    </p>
+                </div>
+
+                <!-- Key Features Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <div class="text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Focused Learning</h3>
+                        <p class="text-gray-600 leading-relaxed">Specifically designed for discrete mathematics students
+                            with targeted content.</p>
+                    </div>
+
+                    <div class="text-center fade-in" style="animation-delay: 0.1s;">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Step-by-Step Solutions</h3>
+                        <p class="text-gray-600 leading-relaxed">Detailed explanations that help you understand the
+                            'why' behind each concept.</p>
+                    </div>
+
+                    <div class="text-center fade-in" style="animation-delay: 0.2s;">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Practical Applications</h3>
+                        <p class="text-gray-600 leading-relaxed">Connect mathematical theory to real-world programming
+                            and computer science.</p>
+                    </div>
+
+                    <div class="text-center fade-in" style="animation-delay: 0.3s;">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform hover:scale-110 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">User-Friendly Interface</h3>
+                        <p class="text-gray-600 leading-relaxed">Clean, intuitive design that makes learning mathematics
+                            enjoyable and efficient.</p>
+                    </div>
+                </div>
+
+                <!-- Problem Statement -->
+                <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 lg:p-12">
+                    <div class="max-w-4xl mx-auto">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6 text-center">Addressing Common Learning
+                            Challenges</h3>
+                        <p class="text-lg text-gray-700 mb-8 text-center">
+                            DiscMath Companion solves the key problems students face when learning discrete mathematics.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-2">Lack of Focus</h4>
+                                        <p class="text-gray-600 text-sm">Existing tools are too broad, not tailored for
+                                            discrete math beginners.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-2">Complex Interfaces</h4>
+                                        <p class="text-gray-600 text-sm">Many platforms have overwhelming interfaces
+                                            that hinder learning.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-2">Answer-Only Approach</h4>
+                                        <p class="text-gray-600 text-sm">Tools give answers without explaining the
+                                            reasoning process.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-2">Missing Practical Links</h4>
+                                        <p class="text-gray-600 text-sm">Fails to connect concepts to Data Structures
+                                            and Algorithms.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-8">
+                    <div class="flex items-center justify-center space-x-3 mb-4">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-semibold">DiscMath Companion</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">DiscMath Companion © 2024. A Mini Project by Nanmathi, Arya, Dhrithi &
+                        Manikaraj.</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardPage" class="hidden min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div class="fixed left-0 top-0 h-full w-64 sidebar z-40">
+            <!-- Logo -->
+            <div class="p-6 border-b border-gray-600">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold text-white">DiscMath</h2>
+                        <p class="text-gray-400 text-sm">Companion</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="p-4">
+                <div class="space-y-1">
+                    <a href="#" onclick="showPage('dashboard')"
+                        class="sidebar-item active flex items-center space-x-3 p-3 text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" onclick="showPage('topics')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                        <span>Topics</span>
+                    </a>
+                    <a href="#" onclick="showPage('formulas')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        <span>Formulas</span>
+                    </a>
+                    <a href="#" onclick="showPage('practice')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                            </path>
+                        </svg>
+                        <span>Practice</span>
+                    </a>
+                    <a href="#" onclick="showPage('profile')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <span>Profile</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- User Section -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-600">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-sm" id="userInitial">U</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-medium text-sm" id="userName">User</p>
+                        <p class="text-gray-400 text-xs" id="userProgress">0% Complete</p>
+                    </div>
+                </div>
+                <button onclick="logout()"
+                    class="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg text-sm font-medium">
+                    Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="ml-64 min-h-screen">
+            <!-- Header -->
+            <header class="main-header p-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900" id="pageTitle">Dashboard</h1>
+                        <p class="text-gray-600" id="pageSubtitle">Welcome back! Continue your learning journey</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-50 px-4 py-2 rounded-lg">
+                            <span class="text-purple-600 font-semibold" id="userScore">Score: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div id="dashboardContent" class="p-6">
+                <!-- Progress Overview -->
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="card stats-card p-8 fade-in">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold uppercase tracking-wide">Topics Completed
+                                </p>
+                                <p class="text-4xl font-bold text-gray-900 mt-2" id="completedTopics">0/8</p>
+                            </div>
+                            <div class="icon-container w-16 h-16 flex items-center justify-center">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div class="progress-bar h-4 rounded-full transition-all duration-1000 ease-out"
+                                style="width: 0%" id="topicProgress"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-medium">Complete all topics to master discrete math
+                        </p>
+                    </div>
+
+                    <div class="card stats-card p-8 fade-in" style="animation-delay: 0.1s">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold uppercase tracking-wide">Practice Score
+                                </p>
+                                <p class="text-4xl font-bold text-gray-900 mt-2" id="practiceScore">0</p>
+                            </div>
+                            <div class="icon-container w-16 h-16 flex items-center justify-center">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 font-medium">Keep practicing to improve!</p>
+                        </div>
+                    </div>
+
+                    <div class="card stats-card p-8 fade-in" style="animation-delay: 0.2s">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold uppercase tracking-wide">Study Streak</p>
+                                <p class="text-4xl font-bold text-gray-900 mt-2" id="studyStreak">0 days</p>
+                            </div>
+                            <div class="icon-container w-16 h-16 flex items-center justify-center">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                            <p class="text-sm text-gray-500 font-medium">Daily learning streak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <button onclick="showPage('topics')" class="card p-8 text-left slide-up">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="icon-container w-16 h-16 flex items-center justify-center">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                    </path>
+                                </svg>
+                            </div>
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Continue Learning</h3>
+                        <p class="text-gray-600 text-lg">Explore discrete math topics systematically</p>
+                    </button>
+
+                    <button onclick="showPage('practice')" class="card p-8 text-left slide-up"
+                        style="animation-delay: 0.1s">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="icon-container w-16 h-16 flex items-center justify-center">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Practice Problems</h3>
+                        <p class="text-gray-600 text-lg">Test your understanding with quizzes</p>
+                    </button>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Recent Activity</h3>
+                        <button onclick="clearRecentActivity()"
+                            class="text-red-500 hover:text-red-700 text-sm font-medium flex items-center space-x-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                </path>
+                            </svg>
+                            <span>Clear All</span>
+                        </button>
+                    </div>
+                    <div id="recentActivity" class="space-y-3">
+                        <p class="text-gray-500 text-center py-8">No recent activity. Start learning to see your
+                            progress here!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topics Content -->
+            <div id="topicsContent" class="hidden p-6">
+                <div class="grid gap-6" id="topicsList">
+                    <!-- Topics will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Formulas Content -->
+            <div id="formulasContent" class="hidden p-6">
+                <div class="grid lg:grid-cols-2 gap-6" id="formulasList">
+                    <!-- Formulas will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Practice Content -->
+            <div id="practiceContent" class="hidden p-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="card p-8" id="practiceArea">
+                        <div class="text-center">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Problems</h2>
+                            <p class="text-gray-600 mb-6">Select a topic to start practicing</p>
+                            <div class="grid md:grid-cols-2 gap-4" id="practiceTopics">
+                                <!-- Practice topics will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Profile Content -->
+            <div id="profileContent" class="hidden p-6">
+                <div class="max-w-3xl mx-auto">
+                    <div class="card p-8 fade-in">
+
+                        <!-- User Header -->
+                        <div class="flex items-center space-x-6 mb-8">
+                            <!-- Avatar -->
+                            <div
+                                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                                <span id="profileInitial">U</span>
+                            </div>
+                            <!-- Info -->
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900" id="profileDisplayName">User Name</h2>
+                                <p class="text-gray-600" id="profileDisplayEmail">user@example.com</p>
+                                <p class="text-sm text-gray-400 mt-1">Joined: <span
+                                        id="profileJoinDate">2025-10-04</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Edit Section -->
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6 border-b pb-2">Edit Profile</h3>
+
+                        <!-- Input Fields -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                <input type="text" id="profileName"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" id="profileEmail"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex justify-end space-x-4 mt-8">
+                            <button onclick="resetProfile()"
+                                class="px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 font-medium transition">
+                                Cancel
+                            </button>
+                            <button onclick="updateProfile()"
+                                class="primary-btn text-white px-6 py-2 rounded-lg font-medium">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal (Moved outside dashboard for visibility) -->
+    <div id="loginModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Sign In</h2>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <input type="text" placeholder="Enter your name" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <input type="email" placeholder="Email address" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Sign In
+                </button>
+            </form>
+            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+            <form id="signUpForm" onsubmit="handleSignUp(event); return false;" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" id="firstName" placeholder="First Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="text" id="lastName" placeholder="Last Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                </div>
+                <div>
+                    <input type="text" id="username" placeholder="Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <input type="email" id="signUpEmail" placeholder="Email address" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signUpPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signUpPassword', 'signUpPasswordToggle')" 
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signUpPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Create Account
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Already have an account? 
+                    <button onclick="switchToSignIn()" class="text-purple-600 hover:text-purple-800 font-medium">Sign In</button>
+                </p>
+            </div>
+            <button onclick="closeSignUp()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Welcome Back</h2>
+            <form onsubmit="handleSignIn(event)" class="space-y-4">
+                <div>
+                    <input type="text" id="signInEmailUsername" placeholder="Email or Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signInPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signInPassword', 'signInPasswordToggle')" 
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signInPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Sign In
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Don't have an account? 
+                    <button onclick="switchToSignUp()" class="text-purple-600 hover:text-purple-800 font-medium">Sign Up</button>
+                </p>
+            </div>
+            <button onclick="closeSignIn()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data Structures - Using HashMap (Object) and Arrays for data storage
+        class DataStore {
+            constructor() {
+                // HashMap for user data (simple object-based map simulation if needed, but using native Map)
+                this.users = new Map();
+
+                // Map for user activities (email -> array of activities)
+                this.userActivities = new Map();
+
+                // Array of topics
+                this.topics = [
+                    {
+                        id: 1,
+                        name: "Set Theory",
+                        description: "Learn about sets, operations, and relationships",
+                        completed: false,
+                        formulas: ["A ∪ B", "A ∩ B", "A - B", "A'"],
+                        learningContent: {
+                            introduction: "Set theory is the foundation of modern mathematics. A set is a collection of distinct objects, called elements or members.",
+                            youtubeLink: "https://youtu.be/iTZfATpm0Yk?si=eU4MnOm85KpAtJc0",
+                            concepts: [
+                                {
+                                    title: "What is a Set?",
+                                    content: "A set is a well-defined collection of distinct objects. For example, A = {1, 2, 3} is a set containing three numbers.",
+                                    example: "Examples: {red, blue, green}, {1, 3, 5, 7}, {apple, banana, orange}"
+                                },
+                                {
+                                    title: "Set Operations",
+                                    content: "Sets can be combined using various operations:",
+                                    example: "Union (∪): Combines all elements from both sets\nIntersection (∩): Elements common to both sets\nDifference (-): Elements in first set but not second"
+                                },
+                                {
+                                    title: "Venn Diagrams",
+                                    content: "Visual representations of sets using circles to show relationships between different sets.",
+                                    example: "Two overlapping circles can show union, intersection, and differences between sets A and B."
+                                }
+                            ],
+                            keyPoints: [
+                                "Sets contain unique elements (no duplicates)",
+                                "Order doesn't matter in sets",
+                                "Empty set (∅) contains no elements",
+                                "Universal set (U) contains all possible elements"
+                            ]
+                        },
+                        problems: [
+                            {
+                                question: "If A = {1, 2, 3} and B = {2, 3, 4}, find A ∪ B",
+                                options: ["{1, 2, 3, 4}", "{2, 3}", "{1, 4}", "{1, 2, 3, 2, 3, 4}"],
+                                correct: 0,
+                                explanation: "The union of sets A and B includes all unique elements from both sets: 1,2,3 from A and 2,3,4 from B, resulting in {1,2,3,4}. Duplicates are not repeated."
+                            },
+                            {
+                                question: "What is A ∩ B for the same sets?",
+                                options: ["{1, 4}", "{2, 3}", "{1, 2, 3, 4}", "∅"],
+                                correct: 1,
+                                explanation: "The intersection includes only elements present in both sets: 2 and 3 are common to A and B."
+                            },
+                            {
+                                question: "Find A - B for A={1,2,3}, B={2,3,4}",
+                                options: ["{1}", "{2}", "{3}", "∅"],
+                                correct: 0,
+                                explanation: "Set difference A - B removes all elements of B from A: from {1,2,3}, remove 2 and 3, leaving {1}."
+                            },
+                            {
+                                question: "If U={1,2,3,4,5}, A={1,2}, find A'",
+                                options: ["{1,2,3}", "{3,4,5}", "{2,3,4}", "{5}"],
+                                correct: 1,
+                                explanation: "The complement A' consists of all elements in the universal set U that are not in A: U = {1,2,3,4,5} minus {1,2} = {3,4,5}."
+                            },
+                            {
+                                question: "Which is true?",
+                                options: ["{1,2} ⊆ {1,2,3}", "{4} ∈ {1,2,3}", "∅ ⊆ ∅ is false", "Order matters in sets"],
+                                correct: 0,
+                                explanation: "The subset relation ⊆ means every element of the left set is in the right set. {1,2} ⊆ {1,2,3} is true. {4} is not an element of {1,2,3}, ∅ ⊆ ∅ is true, and order does not matter in sets."
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Logic & Proofs",
+                        description: "Propositional logic, truth tables, and proof techniques",
+                        completed: false,
+                        formulas: ["P ∧ Q", "P ∨ Q", "P → Q", "¬P"],
+                        learningContent: {
+                            introduction: "Logic is the foundation of mathematical reasoning and computer science. It helps us determine what is true or false.",
+                            youtubeLink: "https://youtu.be/HIkIqt_ytdc?si=nPo3ODFdYHrip233",
+                            concepts: [
+                                {
+                                    title: "Propositions",
+                                    content: "A proposition is a statement that is either true or false, but not both.",
+                                    example: "'The sky is blue' is a proposition (true)\n'2 + 2 = 5' is a proposition (false)\n'What time is it?' is NOT a proposition"
+                                },
+                                {
+                                    title: "Logical Operators",
+                                    content: "We can combine propositions using logical operators:",
+                                    example: "AND (∧): Both must be true\nOR (∨): At least one must be true\nNOT (¬): Opposite truth value\nIMPLIES (→): If P then Q"
+                                },
+                                {
+                                    title: "Truth Tables",
+                                    content: "Truth tables show all possible truth values for logical expressions.",
+                                    example: "P | Q | P∧Q | P∨Q\nT | T |  T  |  T\nT | F |  F  |  T\nF | T |  F  |  T\nF | F |  F  |  F"
+                                }
+                            ],
+                            keyPoints: [
+                                "Every proposition has exactly one truth value",
+                                "Logical operators follow specific rules",
+                                "Truth tables help verify logical equivalences",
+                                "Proofs use logical reasoning to establish truth"
+                            ]
+                        },
+                        problems: [
+                            {
+                                question: "What is the truth value of (T ∧ F) ∨ T?",
+                                options: ["True", "False", "Cannot determine", "Both"],
+                                correct: 0,
+                                explanation: "First, (T ∧ F) evaluates to False (AND requires both true). Then, False ∨ T evaluates to True (OR requires at least one true)."
+                            },
+                            {
+                                question: "Negation of True?",
+                                options: ["True", "False"],
+                                correct: 1,
+                                explanation: "The negation operator (¬) flips the truth value: ¬True = False."
+                            },
+                            {
+                                question: "If P is true, Q is false, what is P → Q?",
+                                options: ["True", "False"],
+                                correct: 1,
+                                explanation: "Implication (→) is false only when the premise P is true and the conclusion Q is false. Here, that's the case."
+                            },
+                            {
+                                question: "If P=false, Q=false, what is P ∨ Q?",
+                                options: ["True", "False"],
+                                correct: 1,
+                                explanation: "OR (∨) is true if at least one is true, but both false results in False."
+                            },
+                            {
+                                question: "Which is tautology?",
+                                options: ["P ∨ ¬P", "P ∧ ¬P", "P → Q", "Q → P"],
+                                correct: 0,
+                                explanation: "A tautology is always true. P ∨ ¬P (law of excluded middle) is always true regardless of P's value. P ∧ ¬P is always false (contradiction)."
+                            }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Graph Theory",
+                        description: "Vertices, edges, paths, and graph algorithms",
+                        completed: false,
+                        formulas: ["V - E + F = 2", "Σdeg(v) = 2|E|"],
+                        learningContent: {
+                            introduction: "Graph theory studies networks of connected objects. It's essential for understanding social networks, computer networks, and many algorithms.",
+                            youtubeLink: "https://youtu.be/LFKZLXVO-Dg?si=9P9RrExU4J1sQCEV",
+                            concepts: [
+                                {
+                                    title: "Basic Components",
+                                    content: "A graph consists of vertices (nodes) connected by edges (links).",
+                                    example: "Vertices: Cities in a map\nEdges: Roads connecting cities\nGraph: The entire road network"
+                                },
+                                {
+                                    title: "Types of Graphs",
+                                    content: "Graphs can be directed or undirected, weighted or unweighted.",
+                                    example: "Directed: One-way streets\nUndirected: Two-way streets\nWeighted: Roads with distances\nUnweighted: Just connections"
+                                },
+                                {
+                                    title: "Graph Properties",
+                                    content: "Important properties include degree, paths, cycles, and connectivity.",
+                                    example: "Degree: Number of connections to a vertex\nPath: Route from one vertex to another\nCycle: Path that returns to starting vertex"
+                                }
+                            ],
+                            keyPoints: [
+                                "Graphs model relationships between objects",
+                                "Degree of vertex = number of incident edges",
+                                "Sum of all degrees = 2 × number of edges",
+                                "Many real-world problems use graph algorithms"
+                            ]
+                        },
+                        problems: [
+                            {
+                                question: "In a complete graph with 5 vertices, how many edges are there?",
+                                options: ["10", "15", "20", "25"],
+                                correct: 0,
+                                explanation: "A complete graph Kn has n(n-1)/2 edges, where every pair of vertices is connected. For n=5, 5*4/2 = 10 edges."
+                            },
+                            {
+                                question: "Degree of each vertex in complete graph K4?",
+                                options: ["2", "3", "4", "6"],
+                                correct: 1,
+                                explanation: "In Kn, each vertex connects to (n-1) others. For K4 (n=4), degree = 3."
+                            },
+                            {
+                                question: "In a tree with 7 vertices, edges=?",
+                                options: ["6", "7", "8", "5"],
+                                correct: 0,
+                                explanation: "A tree with n vertices has exactly (n-1) edges and no cycles. For n=7, edges = 6."
+                            },
+                            {
+                                question: "Which is Eulerian?",
+                                options: ["All vertices even degree", "All vertices odd degree", "Exactly 2 odd", "None"],
+                                correct: 0,
+                                explanation: "A graph has an Eulerian circuit if all vertices have even degree. For Eulerian path, exactly 0 or 2 odd degrees."
+                            },
+                            {
+                                question: "Which is planar?",
+                                options: ["K3,3", "K5", "K4", "K6"],
+                                correct: 2,
+                                explanation: "K4 is planar (can be drawn without crossings). K3,3 and K5 are non-planar by Kuratowski's theorem."
+                            }
+
+                        ]
+                    },
+                    {
+                        id: 4,
+                        name: "Combinatorics",
+                        description: "Counting principles, permutations, and combinations",
+                        completed: false,
+                        formulas: ["P(n,r) = n!/(n-r)!", "C(n,r) = n!/(r!(n-r)!)"],
+                        learningContent: {
+                            introduction: "Combinatorics is the art of counting. It helps us determine how many ways we can arrange, select, or organize objects.",
+                            youtubeLink: "https://youtu.be/ied31kWht7Y?si=Q9Nn_mDz4jsN3TWM",
+                            concepts: [
+                                {
+                                    title: "Fundamental Counting Principle",
+                                    content: "If one event can occur in m ways and another in n ways, then both can occur in m × n ways.",
+                                    example: "Choosing outfit: 3 shirts × 2 pants = 6 different outfits\nPassword: 26 letters × 10 digits = 260 combinations for 2 characters"
+                                },
+                                {
+                                    title: "Permutations",
+                                    content: "Arrangements where order matters. P(n,r) = n!/(n-r)!",
+                                    example: "Arranging 3 books from 5: P(5,3) = 5!/(5-3)! = 5!/2! = 60\nFirst place: 5 choices, Second: 4 choices, Third: 3 choices"
+                                },
+                                {
+                                    title: "Combinations",
+                                    content: "Selections where order doesn't matter. C(n,r) = n!/(r!(n-r)!)",
+                                    example: "Choosing 3 books from 5: C(5,3) = 5!/(3!×2!) = 10\nSame selection regardless of order"
+                                }
+                            ],
+                            keyPoints: [
+                                "Use permutations when order matters",
+                                "Use combinations when order doesn't matter",
+                                "Factorial (n!) = n × (n-1) × ... × 1",
+                                "Always identify if repetition is allowed"
+                            ]
+                        },
+                        problems: [
+                            {
+                                question: "How many ways can you arrange 3 books from 5 books?",
+                                options: ["60", "10", "15", "125"],
+                                correct: 0,
+                                explanation: "This is a permutation since order matters: P(5,3) = 5 × 4 × 3 = 60 ways."
+                            },
+                            {
+                                question: "Choose 3 books from 5?",
+                                options: ["60", "10", "15", "20"],
+                                correct: 1,
+                                explanation: "This is a combination since order doesn't matter: C(5,3) = 10 ways."
+                            },
+                            {
+                                question: "Factorial 4! = ?",
+                                options: ["24", "12", "20", "16"],
+                                correct: 0,
+                                explanation: "n! = n × (n-1) × ... × 1, so 4! = 4 × 3 × 2 × 1 = 24."
+                            },
+                            {
+                                question: "P(6,2) = ?",
+                                options: ["30", "36", "15", "12"],
+                                correct: 0,
+                                explanation: "P(6,2) = 6 × 5 = 30 (arrangements of 2 items from 6)."
+                            },
+                            {
+                                question: "C(6,2) = ?",
+                                options: ["15", "20", "10", "30"],
+                                correct: 0,
+                                explanation: "C(6,2) = 6! / (2! × 4!) = (6×5)/2 = 15 (selections of 2 from 6)."
+                            }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        name: "Number Theory",
+                        description: "Prime numbers, divisibility, and modular arithmetic",
+                        completed: false,
+                        formulas: ["gcd(a,b)", "a ≡ b (mod n)"],
+                        learningContent: {
+                            introduction: "Study of integers and their properties.",
+                            youtubeLink: "https://youtu.be/YcYmbcwmRwQ?si=gG5D1v_gy_c6sivx",
+                            concepts: [
+                                {
+                                    title: "Divisibility",
+                                    content: "a divisible by b if a=bk.",
+                                    example: "20 divisible by 5"
+                                },
+                                {
+                                    title: "Prime Numbers",
+                                    content: "Prime >1 no divisors.",
+                                    example: "2,3,5,7"
+                                },
+                                {
+                                    title: "GCD",
+                                    content: "Largest integer dividing both.",
+                                    example: "gcd(18,24)=6"
+                                },
+                                {
+                                    title: "LCM",
+                                    content: "Smallest common multiple.",
+                                    example: "lcm(4,6)=12"
+                                },
+                                {
+                                    title: "Modular Arithmetic",
+                                    content: "a≡b(mod n).",
+                                    example: "17≡5(mod 12)"
+                                }
+                            ],
+                            keyPoints: ["Primes are building blocks", "Euclidean algorithm", "LCM×GCD=product", "Modular arithmetic important"]
+                        },
+                        problems: [
+                            {
+                                question: "gcd(24,36)?",
+                                options: ["6", "12", "18", "24"],
+                                correct: 1,
+                                explanation: "Using Euclidean algorithm: gcd(36,24) = gcd(24,36 mod 24=12) = gcd(12,24 mod 12=0) = 12. 12 divides both evenly."
+                            },
+                            {
+                                question: "Which is prime?",
+                                options: ["21", "29", "33", "39"],
+                                correct: 1,
+                                explanation: "29 is prime (greater than 1, no divisors other than 1 and itself). 21=3×7, 33=3×11, 39=3×13."
+                            },
+                            {
+                                question: "If a≡2(mod5), b≡3(mod5), (a+b)mod5?",
+                                options: ["0", "1", "4", "5"],
+                                correct: 0,
+                                explanation: "Modular arithmetic: (a + b) mod 5 = (2 + 3) mod 5 = 5 mod 5 = 0."
+                            },
+                            {
+                                question: "LCM(8,12)?",
+                                options: ["16", "24", "48", "96"],
+                                correct: 1,
+                                explanation: "Prime factors: 8=2^3, 12=2^2×3. LCM takes highest powers: 2^3 × 3 = 24."
+                            },
+                            {
+                                question: "Which congruence true?",
+                                options: ["15≡3(mod4)", "20≡3(mod5)", "10≡1(mod2)", "14≡1(mod7)"],
+                                correct: 0,
+                                explanation: "15 ÷ 4 = 3 remainder 3, so 15 ≡ 3 (mod 4). 20 ≡ 0 (mod 5), 10 ≡ 0 (mod 2), 14 ≡ 0 (mod 7)."
+                            }
+                        ]
+                    },
+                    {
+                        id: 6,
+                        name: "Relations",
+                        description: "Binary relations, equivalence, and ordering",
+                        completed: false,
+                        formulas: ["R ⊆ A × B", "R⁻¹"],
+                        problems: []
+                    },
+                    {
+                        id: 7,
+                        name: "Functions",
+                        description: "Domain, range, injective, surjective functions",
+                        completed: false,
+                        formulas: ["f: A → B", "f⁻¹"],
+                        problems: []
+                    },
+                    {
+                        id: 8,
+                        name: "Algorithms",
+                        description: "Complexity analysis and basic algorithms",
+                        completed: false,
+                        formulas: ["O(n)", "Θ(n)", "Ω(n)"],
+                        problems: []
+                    }
+                ];
+
+                // HashMap for formulas by category
+                this.formulas = new Map([
+                    ['Set Theory', [
+                        { name: 'Union', formula: 'A ∪ B', description: 'All elements in A or B or both' },
+                        { name: 'Intersection', formula: 'A ∩ B', description: 'Elements common to both A and B' },
+                        { name: 'Difference', formula: 'A - B', description: 'Elements in A but not in B' },
+                        { name: 'Complement', formula: "A'", description: 'Elements not in A' }
+                    ]],
+                    ['Logic & Proofs', [
+                        { name: 'Conjunction', formula: 'P ∧ Q', description: 'P and Q' },
+                        { name: 'Disjunction', formula: 'P ∨ Q', description: 'P or Q' },
+                        { name: 'Implication', formula: 'P → Q', description: 'If P then Q' },
+                        { name: 'Negation', formula: '¬P', description: 'Not P' }
+                    ]],
+                    ['Combinatorics', [
+                        { name: 'Permutation', formula: 'P(n,r) = n!/(n-r)!', description: 'Arrangements of r items from n items' },
+                        { name: 'Combination', formula: 'C(n,r) = n!/(r!(n-r)!)', description: 'Selections of r items from n items' },
+                        { name: 'Factorial', formula: 'n! = n × (n-1) × ... × 1', description: 'Product of positive integers up to n' }
+                    ]]
+                ]);
+
+                // Current user data
+                this.currentUser = null;
+
+                // Load persisted data from localStorage (simple JSON object/array storage)
+                this.loadFromStorage();
+            }
+
+            // Persist data to localStorage using simple JSON serialization
+            saveToStorage() {
+                try {
+                    // Store users as a simple object (email as key, user object as value)
+                    const usersObj = Object.fromEntries(this.users);
+                    localStorage.setItem('discmath_users', JSON.stringify(usersObj));
+
+                    // Store user activities as object (email -> array)
+                    const activitiesObj = Object.fromEntries(this.userActivities);
+                    localStorage.setItem('discmath_userActivities', JSON.stringify(activitiesObj));
+
+                    // Store current user email (to restore on load)
+                    if (this.currentUser) {
+                        localStorage.setItem('discmath_currentUserEmail', this.currentUser.email);
+                    }
+                } catch (error) {
+                    console.error('Failed to save to localStorage:', error);
+                }
+            }
+
+            // Load data from localStorage
+            loadFromStorage() {
+                try {
+                    // Load users
+                    const usersStr = localStorage.getItem('discmath_users');
+                    if (usersStr) {
+                        const usersObj = JSON.parse(usersStr);
+                        this.users = new Map(Object.entries(usersObj));
+                    }
+
+                    // Load user activities
+                    const activitiesStr = localStorage.getItem('discmath_userActivities');
+                    if (activitiesStr) {
+                        const activitiesObj = JSON.parse(activitiesStr);
+                        this.userActivities = new Map(Object.entries(activitiesObj));
+                    }
+
+                    // Restore current user if email is stored
+                    const currentEmail = localStorage.getItem('discmath_currentUserEmail');
+                    if (currentEmail && this.users.has(currentEmail)) {
+                        this.currentUser = this.users.get(currentEmail);
+                        this.updateUI();
+                        this.updateRecentActivity();
+                    }
+                } catch (error) {
+                    console.error('Failed to load from localStorage:', error);
+                }
+            }
+
+            // User management methods
+            setUser(userData) {
+                this.currentUser = {
+                    name: userData.name,
+                    email: userData.email,
+                    score: 0,
+                    completedTopics: 0,
+                    streak: 0,
+                    joinDate: new Date().toISOString()
+                };
+                this.users.set(userData.email, this.currentUser);
+
+                // Initialize activities for new user
+                if (!this.userActivities.has(userData.email)) {
+                    this.userActivities.set(userData.email, []);
+                }
+
+                this.updateUI();
+                this.updateRecentActivity();
+                this.saveToStorage(); // Persist after setting
+            }
+
+            // Add activity to user's log
+            addActivity(activity) {
+                if (!this.currentUser) return;
+
+                let userActs = this.userActivities.get(this.currentUser.email) || [];
+                userActs.unshift({
+                    ...activity,
+                    timestamp: new Date().toISOString()
+                });
+                if (userActs.length > 10) {
+                    userActs.pop(); // Keep only last 10 activities
+                }
+                this.userActivities.set(this.currentUser.email, userActs);
+                this.updateRecentActivity();
+                this.saveToStorage(); // Persist activities
+            }
+
+            // Update topic completion
+            completeTopicProblem(topicId, score) {
+                const topic = this.topics.find(t => t.id === topicId);
+                if (topic && this.currentUser) {
+                    if (!topic.completed) {
+                        topic.completed = true;
+                        this.currentUser.completedTopics++;
+                        this.addActivity({
+                            type: 'topic_completed',
+                            message: `Completed ${topic.name}`,
+                            score: score
+                        });
+                    }
+                    this.currentUser.score += score;
+                    this.updateUI();
+                    this.saveToStorage(); // Persist after update
+                }
+            }
+
+            // Update profile (fixed to handle email change properly)
+            updateProfile(name, email) {
+                if (!this.currentUser) return;
+
+                const oldEmail = this.currentUser.email;
+
+                // Update current user
+                this.currentUser.name = name;
+                this.currentUser.email = email;
+
+                // Handle users map
+                this.users.set(email, this.currentUser);
+                if (oldEmail !== email) {
+                    this.users.delete(oldEmail);
+                }
+
+                // Handle userActivities map
+                if (oldEmail !== email) {
+                    const oldActs = this.userActivities.get(oldEmail) || [];
+                    this.userActivities.set(email, oldActs);
+                    this.userActivities.delete(oldEmail);
+                }
+
+                this.updateUI();
+                this.updateRecentActivity();
+                this.saveToStorage(); // Persist profile changes
+            }
+
+            // UI Update methods
+            updateUI() {
+                if (!this.currentUser) return;
+
+                const userName = this.currentUser.name || 'User';
+                document.getElementById('userName').textContent = userName;
+                document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
+                document.getElementById('userScore').textContent = `Score: ${this.currentUser.score || 0}`;
+                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics || 0}/8`;
+                document.getElementById('practiceScore').textContent = this.currentUser.score || 0;
+                document.getElementById('studyStreak').textContent = `${this.currentUser.streak || 0} days`;
+
+                const progress = ((this.currentUser.completedTopics || 0) / 8) * 100;
+                document.getElementById('topicProgress').style.width = `${progress}%`;
+                document.getElementById('userProgress').textContent = `${Math.round(progress)}% Complete`;
+            }
+
+            updateRecentActivity() {
+                if (!this.currentUser) return;
+
+                const userActs = this.userActivities.get(this.currentUser.email) || [];
+                const container = document.getElementById('recentActivity');
+                if (userActs.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-center py-8">No recent activity. Start learning to see your progress here!</p>';
+                    return;
+                }
+
+                container.innerHTML = userActs.map(activity => `
+                    <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <span class="text-purple-600 text-sm">✓</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">${activity.message}</p>
+                            <p class="text-sm text-gray-600">+${activity.score} points</p>
+                        </div>
+                        <span class="text-xs text-gray-500">${new Date(activity.timestamp).toLocaleDateString()}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Initialize data store
+        const dataStore = new DataStore();
+        let currentPage = 'dashboard';
+        let currentPractice = null;
+
+        // Page titles
+        const pageInfo = {
+            dashboard: { title: 'Dashboard', subtitle: 'Welcome back! Continue your learning journey' },
+            topics: { title: 'Learning Topics', subtitle: 'Explore discrete mathematics concepts' },
+            formulas: { title: 'Formula Reference', subtitle: 'Quick reference for important formulas' },
+            practice: { title: 'Practice Problems', subtitle: 'Test your understanding with problems' },
+            profile: { title: 'Profile Settings', subtitle: 'Manage your account preferences' }
+        };
+
+        // Authentication functions
+        function showLogin() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginModal').classList.remove('flex');
+        }
+
+        // New authentication functions for Sign Up and Sign In
+        function showSignUp() {
+            const modal = document.getElementById('signUpModal');
+            console.log('signUpModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signUpModal element not found');
+            }
+        }
+
+        function closeSignUp() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('signUpModal').classList.remove('flex');
+        }
+
+        function showSignIn() {
+            const modal = document.getElementById('signInModal');
+            console.log('signInModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signInModal element not found');
+            }
+        }
+
+        function closeSignIn() {
+            document.getElementById('signInModal').classList.add('hidden');
+            document.getElementById('signInModal').classList.remove('flex');
+        }
+
+        function switchToSignIn() {
+            closeSignUp();
+            showSignIn();
+        }
+
+        function switchToSignUp() {
+            closeSignIn();
+            showSignUp();
+        }
+
+        // Local Storage Authentication Functions
+        function saveUserToStorage(userData) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                // Ensure users is an array
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data in saveUserToStorage:', error);
+                users = [];
+            }
+            users.push(userData);
+            localStorage.setItem('discmath_users', JSON.stringify(users));
+        }
+
+        function getUserFromStorage(emailOrUsername, password) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                // Ensure users is an array
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data in getUserFromStorage:', error);
+                users = [];
+            }
+            return users.find(user => 
+                (user.email === emailOrUsername || user.username === emailOrUsername) && 
+                user.password === password
+            );
+        }
+
+        function setCurrentUser(userData) {
+            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
+        }
+
+        function handleSignUp(event) {
+            console.log('handleSignUp called - START');
+            
+            if (!event) {
+                console.error('Event object is null or undefined');
+                return false;
+            }
+            
+            console.log('Event object:', event);
+            console.log('Event type:', event.type);
+            console.log('Event target:', event.target);
+            
+            event.preventDefault();
+            console.log('preventDefault called');
+
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const username = document.getElementById('username');
+            const email = document.getElementById('signUpEmail');
+            const password = document.getElementById('signUpPassword');
+            
+            console.log('Form elements found:', {
+                firstName: firstName ? firstName.value : 'NOT FOUND',
+                lastName: lastName ? lastName.value : 'NOT FOUND',
+                username: username ? username.value : 'NOT FOUND',
+                email: email ? email.value : 'NOT FOUND',
+                password: password ? password.value : 'NOT FOUND'
+            });
+
+            if (!firstName || !lastName || !username || !email || !password) {
+                console.error('One or more form elements not found!');
+                return false;
+            }
+
+            const firstNameVal = firstName.value.trim();
+            const lastNameVal = lastName.value.trim();
+            const usernameVal = username.value.trim();
+            const emailVal = email.value.trim();
+            const passwordVal = password.value.trim();
+
+            console.log('Form values:', { firstNameVal, lastNameVal, usernameVal, emailVal, passwordVal });
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!firstNameVal || firstNameVal.length < 2) {
+                firstName.classList.add('border-red-500');
+                showMessage('Please enter a valid first name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!lastNameVal || lastNameVal.length < 2) {
+                lastName.classList.add('border-red-500');
+                showMessage('Please enter a valid last name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!usernameVal || usernameVal.length < 3) {
+                username.classList.add('border-red-500');
+                showMessage('Please enter a valid username (at least 3 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!emailVal || !isValidEmail(emailVal)) {
+                email.classList.add('border-red-500');
+                showMessage('Please enter a valid email address', 'error');
+                hasErrors = true;
+            }
+
+            if (!passwordVal || passwordVal.length < 6) {
+                password.classList.add('border-red-500');
+                showMessage('Password must be at least 6 characters long', 'error');
+                hasErrors = true;
+            }
+
+            console.log('Validation errors:', hasErrors);
+
+            // Check if user already exists
+            const existingUsersData = localStorage.getItem('discmath_users') || '[]';
+            let existingUsers;
+            try {
+                existingUsers = JSON.parse(existingUsersData);
+                // Ensure existingUsers is an array
+                if (!Array.isArray(existingUsers)) {
+                    existingUsers = [];
+                }
+            } catch (error) {
+                console.error('Error parsing existing users data:', error);
+                existingUsers = [];
+            }
+            const userExists = existingUsers.find(user => user.email === emailVal || user.username === usernameVal);
+            
+            if (userExists) {
+                if (userExists.email === emailVal) {
+                    email.classList.add('border-red-500');
+                    showMessage('An account with this email already exists', 'error');
+                } else {
+                    username.classList.add('border-red-500');
+                    showMessage('This username is already taken', 'error');
+                }
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                console.log('Stopping due to validation errors');
+                return false;
+            }
+
+            console.log('Creating user data...');
+
+            // Create user data
+            const userData = {
+                firstName: firstNameVal,
+                lastName: lastNameVal,
+                username: usernameVal,
+                email: emailVal,
+                password: passwordVal,
+                createdAt: new Date().toISOString(),
+                streak: 0,
+                completedTopics: 0,
+                totalScore: 0
+            };
+
+            console.log('User data created:', userData);
+
+            // Save to localStorage
+            saveUserToStorage(userData);
+            setCurrentUser(userData);
+
+            // Initialize user in dataStore
+            dataStore.currentUser = userData;
+            dataStore.users.set(emailVal, userData);
+
+            console.log('User saved, showing success message');
+            showMessage('Account created successfully! Welcome to DiscMath Companion!', 'success');
+            closeSignUp();
+            
+            // Switch to dashboard
+            setTimeout(() => {
+                console.log('Switching to dashboard...');
+                switchToDashboard();
+            }, 1500);
+            
+            console.log('handleSignUp completed successfully');
+            return false;
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+
+            const emailOrUsername = document.getElementById('signInEmailUsername').value.trim();
+            const password = document.getElementById('signInPassword').value.trim();
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!emailOrUsername) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                showMessage('Please enter your email or username', 'error');
+                hasErrors = true;
+            }
+
+            if (!password) {
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Please enter your password', 'error');
+                hasErrors = true;
+            }
+
+            if (hasErrors) return;
+
+            // Check credentials
+            const user = getUserFromStorage(emailOrUsername, password);
+            
+            if (!user) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Invalid email/username or password', 'error');
+                return;
+            }
+
+            // Set current user
+            setCurrentUser(user);
+            dataStore.currentUser = user;
+            dataStore.users.set(user.email, user);
+
+            showMessage(`Welcome back, ${user.firstName}!`, 'success');
+            closeSignIn();
+            
+            // Switch to dashboard
+            setTimeout(() => {
+                switchToDashboard();
+            }, 1500);
+        }
+
+        function switchToDashboard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'block';
+            dataStore.updateUI();
+            dataStore.updateRecentActivity();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const nameInput = event.target.querySelector('input[type="text"]');
+            const emailInput = event.target.querySelector('input[type="email"]');
+            const submitButton = event.target.querySelector('button[type="submit"]');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            // Clear previous error states
+            nameInput.classList.remove('border-red-500');
+            emailInput.classList.remove('border-red-500');
+
+            // Validation
+            let hasErrors = false;
+
+            if (!name || name.length < 2) {
+                nameInput.classList.add('border-red-500');
+                showMessage('Please enter a valid name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!email || !isValidEmail(email)) {
+                emailInput.classList.add('border-red-500');
+                showMessage('Please enter a valid email address', 'error');
+                hasErrors = true;
+            }
+
+            if (hasErrors) return;
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing In...
+            `;
+
+            // Simulate authentication process
+            setTimeout(() => {
+                try {
+                    // Check if user already exists
+                    const existingUser = dataStore.users.get(email);
+
+                    if (existingUser) {
+                        // Returning user
+                        dataStore.currentUser = existingUser;
+                        dataStore.currentUser.name = name; // Update name in case it changed
+                        dataStore.updateUI();
+                        dataStore.updateRecentActivity();
+                        showMessage(`Welcome back, ${name}!`, 'success');
+                    } else {
+                        // New user
+                        dataStore.setUser({ name, email });
+                        showMessage(`Welcome to DiscMath Companion, ${name}!`, 'success');
+                    }
+
+                    // Reset form
+                    event.target.reset();
+
+                    // Close modal and show dashboard
+                    closeLogin();
+                    showDashboard();
+
+                } catch (error) {
+                    showMessage('Sign in failed. Please try again.', 'error');
+                } finally {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Sign In';
+                }
+            }, 1500); // Simulate network delay
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function continueAsGuest() {
+            closeLogin(); // Ensure modal is closed
+            dataStore.setUser({ name: 'Guest User', email: 'guest@example.com' });
+            showDashboard();
+        }
+
+        function logout() {
+            dataStore.currentUser = null;
+            localStorage.removeItem('discmath_currentUserEmail'); // Clear current user
+            document.getElementById('dashboardPage').classList.add('hidden');
+            document.getElementById('landingPage').classList.remove('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.remove('hidden');
+            loadTopics();
+            loadFormulas();
+            loadPracticeTopics();
+            dataStore.updateRecentActivity(); // Ensure recent activity is up-to-date
+        }
+
+        // Navigation
+        function showPage(pageName) {
+            // Hide all content
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            contents.forEach(content => {
+                document.getElementById(content).classList.add('hidden');
+            });
+
+            // Also hide learning content if it exists
+            const learningContainer = document.getElementById('learningContent');
+            if (learningContainer) {
+                learningContainer.classList.add('hidden');
+            }
+
+            // Show selected content
+            document.getElementById(pageName + 'Content').classList.remove('hidden');
+
+            // Update page info
+            const info = pageInfo[pageName];
+            document.getElementById('pageTitle').textContent = info.title;
+            document.getElementById('pageSubtitle').textContent = info.subtitle;
+
+            // Update sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[onclick="showPage('${pageName}')"]`).classList.add('active');
+
+            currentPage = pageName;
+
+            // Load content based on the page
+            if (pageName === 'topics') {
+                loadTopics();
+            } else if (pageName === 'formulas') {
+                loadFormulas();
+            } else if (pageName === 'practice') {
+                loadPracticeTopics();
+            } else if (pageName === 'profile' && dataStore.currentUser) {
+                const joinDate = dataStore.currentUser.createdAt ? 
+                    new Date(dataStore.currentUser.createdAt).toISOString().split('T')[0] : 
+                    new Date().toISOString().split('T')[0];
+                
+                // Use firstName and lastName if available, otherwise fallback to name
+                const displayName = dataStore.currentUser.firstName && dataStore.currentUser.lastName ? 
+                    `${dataStore.currentUser.firstName} ${dataStore.currentUser.lastName}` : 
+                    dataStore.currentUser.name || 'User';
+                
+                document.getElementById('profileDisplayName').textContent = displayName;
+                document.getElementById('profileDisplayEmail').textContent = dataStore.currentUser.email;
+                document.getElementById('profileJoinDate').textContent = joinDate;
+                document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
+                document.getElementById('profileName').value = displayName;
+                document.getElementById('profileEmail').value = dataStore.currentUser.email;
+            }
+        }
+
+        // Load topics
+        function loadTopics() {
+            const container = document.getElementById('topicsList');
+            container.innerHTML = dataStore.topics.map(topic => `
+                <div class="card topic-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h3 class="text-xl font-semibold text-gray-900">${topic.name}</h3>
+                                ${topic.completed ? '<span class="text-green-500 text-sm">✓ Completed</span>' : ''}
+                            </div>
+                            <p class="text-gray-600 mb-4">${topic.description}</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${topic.formulas.map(formula => `
+                                    <span class="formula-highlight px-3 py-1 rounded-lg text-sm">${formula}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="flex gap-2 ml-4">
+                            <button onclick="learnTopic(${topic.id})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
+                                Learn
+                            </button>
+                            <button onclick="startTopicPractice(${topic.id})" class="primary-btn text-white px-4 py-2 rounded-lg font-medium">
+                                ${topic.completed ? 'Review' : 'Practice'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load formulas
+        function loadFormulas() {
+            const container = document.getElementById('formulasList');
+            let html = '';
+
+            dataStore.formulas.forEach((formulas, category) => {
+                html += `
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-purple-600 mb-4">${category}</h3>
+                        <div class="space-y-3">
+                            ${formulas.map(item => `
+                                <div class="formula-highlight p-4 rounded-lg">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-gray-900">${item.name}</span>
+                                        <code class="text-purple-600 font-mono text-lg">${item.formula}</code>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">${item.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Load practice topics
+        function loadPracticeTopics() {
+            const container = document.getElementById('practiceTopics');
+            container.innerHTML = dataStore.topics.filter(topic => topic.problems.length > 0).map(topic => `
+                <button onclick="startPractice(${topic.id})" class="card p-4 text-left hover:scale-105 transition-all">
+                    <h4 class="font-semibold text-gray-900 mb-2">${topic.name}</h4>
+                    <p class="text-gray-600 text-sm">${topic.problems.length} problems available</p>
+                </button>
+            `).join('');
+        }
+
+        // Learning function
+        function learnTopic(topicId) {
+            const topic = dataStore.topics.find(t => t.id === topicId);
+            if (!topic || !topic.learningContent) {
+                showMessage('Learning content for this topic is coming soon!', 'info');
+                return;
+            }
+
+            showLearningContent(topic);
+        }
+
+        function showLearningContent(topic) {
+            // Hide all content sections
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            contents.forEach(content => {
+                document.getElementById(content).classList.add('hidden');
+            });
+
+            // Update page info
+            document.getElementById('pageTitle').textContent = `Learning: ${topic.name}`;
+            document.getElementById('pageSubtitle').textContent = 'Master the concepts step by step';
+
+            // Create learning content
+            const learningHTML = `
+                <div class="max-w-4xl mx-auto">
+                    <!-- Back Button -->
+                    <button onclick="showPage('topics')" class="mb-6 flex items-center space-x-2 text-purple-600 hover:text-purple-700 font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        <span>Back to Topics</span>
+                    </button>
+                    
+                    <!-- Introduction -->
+                    <div class="card p-8 mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">${topic.name}</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed">${topic.learningContent.introduction}</p>
+                    </div>
+                    
+                    
+                    <!-- Concepts -->
+                    <div class="space-y-6 mb-8">
+                        ${topic.learningContent.concepts.map((concept, index) => `
+                            <div class="card p-6 fade-in" style="animation-delay: ${index * 0.1}s">
+                                <h3 class="text-xl font-semibold text-purple-600 mb-4">${concept.title}</h3>
+                                <p class="text-gray-700 mb-4 leading-relaxed">${concept.content}</p>
+                                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-blue-800 mb-2">Example:</h4>
+                                    <pre class="text-blue-700 text-sm whitespace-pre-wrap font-mono">${concept.example}</pre>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Key Points -->
+                    <div class="card p-6 mb-8">
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">🔑 Key Points to Remember</h3>
+                        <ul class="space-y-3">
+                            ${topic.learningContent.keyPoints.map(point => `
+                                <li class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <span class="text-gray-700">${point}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startTopicPractice(${topic.id})" class="primary-btn text-white px-8 py-3 rounded-lg font-medium flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                            <span>Practice Problems</span>
+                        </button>
+                        <button onclick="showPage('formulas')" class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>View Formulas</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Create or update learning content container
+            let learningContainer = document.getElementById('learningContent');
+            if (!learningContainer) {
+                learningContainer = document.createElement('div');
+                learningContainer.id = 'learningContent';
+                learningContainer.className = 'p-6';
+                document.querySelector('.ml-64').appendChild(learningContainer);
+            }
+
+            learningContainer.innerHTML = learningHTML;
+            learningContainer.classList.remove('hidden');
+
+            // Mark as viewed
+            dataStore.addActivity({
+                type: 'topic_viewed',
+                message: `Studied ${topic.name}`,
+                score: 5
+            });
+        }
+
+        // Practice functions
+        function startTopicPractice(topicId) {
+            const topic = dataStore.topics.find(t => t.id === topicId);
+            if (topic.problems.length > 0) {
+                showPage('practice');
+                startPractice(topicId);
+            } else {
+                showMessage('Practice problems for this topic are coming soon!', 'info');
+            }
+        }
+
+        function startPractice(topicId) {
+            const topic = dataStore.topics.find(t => t.id === topicId);
+            if (!topic || topic.problems.length === 0) {
+                showMessage('No practice problems available for this topic yet.', 'info');
+                return;
+            }
+
+            currentPractice = {
+                topicId: topicId,
+                currentQuestion: 0,
+                score: 0,
+                answers: []
+            };
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            const question = topic.problems[currentPractice.currentQuestion];
+
+            document.getElementById('practiceArea').innerHTML = `
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
+                        <span class="text-gray-600">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
+                        <div class="space-y-3">
+                            ${question.options.map((option, index) => `
+                                <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all answer-option">
+                                    <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium">
+                            Back to Topics
+                        </button>
+                        <div class="text-gray-600">
+                            Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectAnswer(selectedIndex) {
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            const question = topic.problems[currentPractice.currentQuestion];
+            const isCorrect = selectedIndex === question.correct;
+
+            // Highlight selected answer
+            const options = document.querySelectorAll('.answer-option');
+            options.forEach((option, index) => {
+                if (index === selectedIndex) {
+                    option.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+                if (index === question.correct && !isCorrect) {
+                    option.classList.add('correct');
+                }
+
+                option.style.pointerEvents = 'none';
+            });
+
+            currentPractice.answers.push(selectedIndex);
+            if (isCorrect) {
+                currentPractice.score += 10;
+            }
+
+            // Show explanation only if wrong
+            if (!isCorrect) {
+                const optionsContainer = document.querySelector('.mb-8 .space-y-3');
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'mt-4 p-4 bg-red-50 border-l-4 border-red-400 rounded-r-lg';
+                explanationDiv.innerHTML = `
+                    <h4 class="font-semibold text-red-800 mb-2">Why is this wrong?</h4>
+                    <p class="text-red-700 text-sm">${question.explanation}</p>
+                `;
+                optionsContainer.insertAdjacentElement('afterend', explanationDiv);
+            }
+
+            // Show next question or finish
+            setTimeout(() => {
+                currentPractice.currentQuestion++;
+                if (currentPractice.currentQuestion < topic.problems.length) {
+                    showQuestion();
+                } else {
+                    finishPractice();
+                }
+            }, 3000); // Increased timeout to 3s to allow reading the explanation
+        }
+
+        function finishPractice() {
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            const totalQuestions = topic.problems.length;
+            const correctAnswers = currentPractice.answers.filter((answer, index) =>
+                answer === topic.problems[index].correct
+            ).length;
+
+            dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
+
+            document.getElementById('practiceArea').innerHTML = `
+                <div class="text-center max-w-md mx-auto">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
+                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
+                        <p class="text-gray-600">Correct Answers</p>
+                        <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                            Try Again
+                        </button>
+                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
+                            Back to Topics
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            currentPractice = null;
+        }
+
+        // Profile functions (now uses the updated method in DataStore)
+        function updateProfile() {
+            if (!dataStore.currentUser) return;
+
+            const name = document.getElementById('profileName').value.trim();
+            const email = document.getElementById('profileEmail').value.trim();
+
+            // Validation
+            if (!name || name.length < 2) {
+                showMessage('Please enter a valid name (at least 2 characters)', 'error');
+                return;
+            }
+
+            if (!email || !isValidEmail(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+
+            // Update using DataStore method
+            dataStore.updateProfile(name, email);
+
+            // Update profile display elements
+            document.getElementById('profileDisplayName').textContent = name;
+            document.getElementById('profileDisplayEmail').textContent = email;
+            document.getElementById('profileInitial').textContent = name.charAt(0).toUpperCase();
+
+            showMessage('Profile updated successfully!', 'success');
+        }
+
+        function resetProfile() {
+            if (dataStore.currentUser) {
+                document.getElementById('profileName').value = dataStore.currentUser.name;
+                document.getElementById('profileEmail').value = dataStore.currentUser.email;
+            }
+            showMessage('Changes cancelled', 'info');
+        }
+
+        // Clear recent activity function
+        function clearRecentActivity() {
+            if (!dataStore.currentUser || !confirm('Are you sure you want to clear all recent activity? This cannot be undone.')) {
+                return;
+            }
+            dataStore.userActivities.set(dataStore.currentUser.email, []);
+            dataStore.updateRecentActivity();
+            dataStore.saveToStorage();
+            showMessage('Recent activity cleared!', 'success');
+        }
+
+        // Utility functions
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white font-medium z-50 ${type === 'success' ? 'success-message' :
+                type === 'error' ? 'error-message' :
+                    'bg-blue-500'
+                }`;
+            messageDiv.textContent = message;
+
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeLogin();
+            }
+        });
+
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Change to eye-off icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                `;
+                eyeIcon.classList.add('rotate-12');
+            } else {
+                passwordInput.type = 'password';
+                // Change back to eye icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                `;
+                eyeIcon.classList.remove('rotate-12');
+            }
+        }
+
+        // Close Sign Up modal when clicking outside
+        document.getElementById('signUpModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignUp();
+            }
+        });
+
+        // Close Sign In modal when clicking outside
+        document.getElementById('signInModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignIn();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Check if user is already logged in
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                dataStore.currentUser = currentUser;
+                dataStore.users.set(currentUser.email, currentUser);
+                switchToDashboard();
+            }
+        });
+    </script>
+</body>
+
+</html>
