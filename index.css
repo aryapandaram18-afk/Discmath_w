@@ -261,6 +261,10 @@ select:focus {
   }
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
