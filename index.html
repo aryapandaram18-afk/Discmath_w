@@ -1,3 +1,4 @@
+<!-- hello  -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
     <!-- Landing Page -->
     <div id="landingPage" class="gradient-bg min-h-screen">
         <!-- Header -->
-        <nav class="p-6 relative z-10">
+        <nav class="p-6 relative z-50">
             <div class="flex justify-between items-center max-w-6xl mx-auto">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -26,6 +27,27 @@
                         </svg>
                     </div>
                     <span class="text-white text-xl font-semibold">DiscMath Companion</span>
+                </div>
+
+                <div class="flex items-center space-x-4 relative z-50">
+                    <button onclick="showSignIn();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                        <span>Sign In</span>
+                    </button>
+                    <button onclick="showSignUp();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                            </path>
+                        </svg>
+                        <span>Sign Up</span>
+                    </button>
                 </div>
 
             </div>
@@ -56,8 +78,8 @@
                     problems
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 fade-in">
-                    <button onclick="showLogin()"
+                <!-- <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 fade-in">
+                    <button onclick="showSignIn();"
                         class="primary-btn text-white px-10 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,7 +87,7 @@
                         </svg>
                         <span>Start Learning</span>
                     </button>
-                    <button onclick="continueAsGuest()"
+                    <button onclick="continueAsGuest();"
                         class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-10 py-4 rounded-xl text-lg font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -73,7 +95,7 @@
                         </svg>
                         <span>Try as Guest</span>
                     </button>
-                </div>
+                </div> -->
 
                 <!-- Feature highlights -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto fade-in">
@@ -637,6 +659,104 @@
         </div>
     </div>
 
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+            <form id="signUpForm" onsubmit="handleSignUp(event); return false;" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" id="firstName" placeholder="First Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="text" id="lastName" placeholder="Last Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                </div>
+                <div>
+                    <input type="text" id="username" placeholder="Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <input type="email" id="signUpEmail" placeholder="Email address" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signUpPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signUpPassword', 'signUpPasswordToggle')"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signUpPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Create Account
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Already have an account?
+                    <button onclick="switchToSignIn()" class="text-purple-600 hover:text-purple-800 font-medium">Sign
+                        In</button>
+                </p>
+            </div>
+            <button onclick="closeSignUp()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Welcome Back</h2>
+            <form onsubmit="handleSignIn(event)" class="space-y-4">
+                <div>
+                    <input type="text" id="signInEmailUsername" placeholder="Email or Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signInPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signInPassword', 'signInPasswordToggle')"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signInPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Sign In
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Don't have an account?
+                    <button onclick="switchToSignUp()" class="text-purple-600 hover:text-purple-800 font-medium">Sign
+                        Up</button>
+                </p>
+            </div>
+            <button onclick="closeSignIn()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
     <script>
         // Data Structures - Using HashMap (Object) and Arrays for data storage
         class DataStore {
@@ -1178,14 +1298,15 @@
             updateUI() {
                 if (!this.currentUser) return;
 
-                document.getElementById('userName').textContent = this.currentUser.name;
-                document.getElementById('userInitial').textContent = this.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('userScore').textContent = `Score: ${this.currentUser.score}`;
-                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics}/8`;
-                document.getElementById('practiceScore').textContent = this.currentUser.score;
-                document.getElementById('studyStreak').textContent = `${this.currentUser.streak} days`;
+                const userName = this.currentUser.name || 'User';
+                document.getElementById('userName').textContent = userName;
+                document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
+                document.getElementById('userScore').textContent = `Score: ${this.currentUser.score || 0}`;
+                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics || 0}/8`;
+                document.getElementById('practiceScore').textContent = this.currentUser.score || 0;
+                document.getElementById('studyStreak').textContent = `${this.currentUser.streak || 0} days`;
 
-                const progress = (this.currentUser.completedTopics / 8) * 100;
+                const progress = ((this.currentUser.completedTopics || 0) / 8) * 100;
                 document.getElementById('topicProgress').style.width = `${progress}%`;
                 document.getElementById('userProgress').textContent = `${Math.round(progress)}% Complete`;
             }
@@ -1238,6 +1359,401 @@
         function closeLogin() {
             document.getElementById('loginModal').classList.add('hidden');
             document.getElementById('loginModal').classList.remove('flex');
+        }
+
+        // New authentication functions for Sign Up and Sign In
+        function showSignUp() {
+            const modal = document.getElementById('signUpModal');
+            console.log('signUpModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signUpModal element not found');
+            }
+        }
+
+        function closeSignUp() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('signUpModal').classList.remove('flex');
+        }
+
+        function showSignIn() {
+            const modal = document.getElementById('signInModal');
+            console.log('signInModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signInModal element not found');
+            }
+        }
+
+        function closeSignIn() {
+            document.getElementById('signInModal').classList.add('hidden');
+            document.getElementById('signInModal').classList.remove('flex');
+        }
+
+        function switchToSignIn() {
+            closeSignUp();
+            showSignIn();
+        }
+
+        function switchToSignUp() {
+            closeSignIn();
+            showSignUp();
+        }
+
+        // Local Storage Authentication Functions
+        function saveUserToStorage(userData) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+
+                // Check if user already exists
+                const existingIndex = users.findIndex(user =>
+                    user.email === userData.email || user.username === userData.username
+                );
+
+                if (existingIndex !== -1) {
+                    // Update existing user
+                    users[existingIndex] = userData;
+                } else {
+                    // Add new user
+                    users.push(userData);
+                }
+            } catch (error) {
+                console.error('Error parsing users data:', error);
+                users = [userData];
+            }
+            localStorage.setItem('discmath_users', JSON.stringify(users));
+        }
+
+        function getUserFromStorage(emailOrUsername, password) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data:', error);
+                users = [];
+            }
+
+            return users.find(user =>
+                (user.email === emailOrUsername || user.username === emailOrUsername) &&
+                user.password === password
+            );
+        }
+
+        function setCurrentUser(userData) {
+            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
+        }
+
+        function getCurrentUser() {
+            try {
+                return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
+            } catch (error) {
+                console.error('Error parsing current user:', error);
+                return null;
+            }
+        }
+        function getUserFromStorage(emailOrUsername, password) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                // Ensure users is an array
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data in getUserFromStorage:', error);
+                users = [];
+            }
+            return users.find(user =>
+                (user.email === emailOrUsername || user.username === emailOrUsername) &&
+                user.password === password
+            );
+        }
+
+        function setCurrentUser(userData) {
+            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
+        }
+
+        function handleSignUp(event) {
+            console.log('handleSignUp called - START');
+
+            if (!event) {
+                console.error('Event object is null or undefined');
+                return false;
+            }
+
+            console.log('Event object:', event);
+            console.log('Event type:', event.type);
+            console.log('Event target:', event.target);
+
+            event.preventDefault();
+            console.log('preventDefault called');
+
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const username = document.getElementById('username');
+            const email = document.getElementById('signUpEmail');
+            const password = document.getElementById('signUpPassword');
+
+            console.log('Form elements found:', {
+                firstName: firstName ? firstName.value : 'NOT FOUND',
+                lastName: lastName ? lastName.value : 'NOT FOUND',
+                username: username ? username.value : 'NOT FOUND',
+                email: email ? email.value : 'NOT FOUND',
+                password: password ? password.value : 'NOT FOUND'
+            });
+
+            if (!firstName || !lastName || !username || !email || !password) {
+                console.error('One or more form elements not found!');
+                return false;
+            }
+
+            const firstNameVal = firstName.value.trim();
+            const lastNameVal = lastName.value.trim();
+            const usernameVal = username.value.trim();
+            const emailVal = email.value.trim();
+            const passwordVal = password.value.trim();
+
+            console.log('Form values:', { firstNameVal, lastNameVal, usernameVal, emailVal, passwordVal });
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!firstNameVal || firstNameVal.length < 2) {
+                firstName.classList.add('border-red-500');
+                showMessage('Please enter a valid first name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!lastNameVal || lastNameVal.length < 2) {
+                lastName.classList.add('border-red-500');
+                showMessage('Please enter a valid last name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!usernameVal || usernameVal.length < 3) {
+                username.classList.add('border-red-500');
+                showMessage('Please enter a valid username (at least 3 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!emailVal || !isValidEmail(emailVal)) {
+                email.classList.add('border-red-500');
+                showMessage('Please enter a valid email address', 'error');
+                hasErrors = true;
+            }
+
+            if (!passwordVal || passwordVal.length < 6) {
+                password.classList.add('border-red-500');
+                showMessage('Password must be at least 6 characters long', 'error');
+                hasErrors = true;
+            }
+
+            console.log('Validation errors:', hasErrors);
+
+            // Check if user already exists
+            const existingUsersData = localStorage.getItem('discmath_users') || '[]';
+            let existingUsers;
+            try {
+                existingUsers = JSON.parse(existingUsersData);
+                // Ensure existingUsers is an array
+                if (!Array.isArray(existingUsers)) {
+                    existingUsers = [];
+                }
+            } catch (error) {
+                console.error('Error parsing existing users data:', error);
+                existingUsers = [];
+            }
+            const userExists = existingUsers.find(user => user.email === emailVal || user.username === usernameVal);
+
+            if (userExists) {
+                if (userExists.email === emailVal) {
+                    email.classList.add('border-red-500');
+                    showMessage('An account with this email already exists', 'error');
+                } else {
+                    username.classList.add('border-red-500');
+                    showMessage('This username is already taken', 'error');
+                }
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                console.log('Stopping due to validation errors');
+                return false;
+            }
+
+            console.log('Creating user data...');
+
+            // Create user data
+            const userData = {
+                firstName: firstNameVal,
+                lastName: lastNameVal,
+                username: usernameVal,
+                email: emailVal,
+                password: passwordVal,
+                createdAt: new Date().toISOString(),
+                streak: 0,
+                completedTopics: 0,
+                totalScore: 0
+            };
+
+            console.log('User data created:', userData);
+
+            // Save to localStorage
+            saveUserToStorage(userData);
+            setCurrentUser(userData);
+
+            // Initialize user in dataStore
+            dataStore.currentUser = userData;
+            dataStore.users.set(emailVal, userData);
+
+            // Initialize activities for new user
+            if (!dataStore.userActivities.has(emailVal)) {
+                dataStore.userActivities.set(emailVal, []);
+            }
+
+            // Save to dataStore storage
+            dataStore.saveToStorage();
+
+            console.log('User saved, showing success message');
+            showMessage('Account created successfully! Welcome to DiscMath Companion!', 'success');
+            closeSignUp();
+
+            // Switch to dashboard
+            setTimeout(() => {
+                console.log('Switching to dashboard...');
+                switchToDashboard();
+            }, 1500);
+
+            console.log('handleSignUp completed successfully');
+            return false;
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+
+            const emailOrUsername = document.getElementById('signInEmailUsername').value.trim();
+            const password = document.getElementById('signInPassword').value.trim();
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!emailOrUsername) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                showMessage('Please enter your email or username', 'error');
+                hasErrors = true;
+            }
+
+            if (!password) {
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Please enter your password', 'error');
+                hasErrors = true;
+            }
+
+            if (hasErrors) return;
+
+            // Check credentials using both methods
+            let user = null;
+
+            // Method 1: Check in localStorage users array
+            user = getUserFromStorage(emailOrUsername, password);
+
+            // Method 2: Check in dataStore Map (fallback)
+            if (!user) {
+                // Check by email
+                if (dataStore.users.has(emailOrUsername)) {
+                    const potentialUser = dataStore.users.get(emailOrUsername);
+                    if (potentialUser.password === password) {
+                        user = potentialUser;
+                    }
+                }
+                // Check by username
+                if (!user) {
+                    for (let [email, userData] of dataStore.users) {
+                        if (userData.username === emailOrUsername && userData.password === password) {
+                            user = userData;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!user) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Invalid email/username or password', 'error');
+                return;
+            }
+
+            // Set current user in both systems
+            setCurrentUser(user);
+            dataStore.currentUser = user;
+
+            // Ensure user exists in dataStore users Map
+            if (!dataStore.users.has(user.email)) {
+                dataStore.users.set(user.email, user);
+            }
+
+            // Initialize activities if needed
+            if (!dataStore.userActivities.has(user.email)) {
+                dataStore.userActivities.set(user.email, []);
+            }
+
+            showMessage(`Welcome back, ${user.firstName || user.name}!`, 'success');
+            closeSignIn();
+
+            // Switch to dashboard
+            setTimeout(() => {
+                switchToDashboard();
+            }, 1500);
+        }
+
+        function switchToDashboard() {
+            // Hide landing page and show dashboard using classes
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.remove('hidden');
+
+            // Reset any display styles
+            document.getElementById('landingPage').style.display = '';
+            document.getElementById('dashboardPage').style.display = '';
+
+            // Ensure UI is properly updated
+            if (dataStore.currentUser) {
+                dataStore.updateUI();
+                dataStore.updateRecentActivity();
+            }
+
+            // Load necessary content
+            loadTopics();
+            loadFormulas();
+            loadPracticeTopics();
         }
 
         function handleLogin(event) {
@@ -1329,10 +1845,22 @@
         }
 
         function logout() {
+            // Clear current user from dataStore
             dataStore.currentUser = null;
-            localStorage.removeItem('discmath_currentUserEmail'); // Clear current user
+
+            // Clear current user from localStorage
+            localStorage.removeItem('discmath_current_user');
+            localStorage.removeItem('discmath_currentUserEmail');
+
+            // Hide dashboard and show landing page using the same method
             document.getElementById('dashboardPage').classList.add('hidden');
             document.getElementById('landingPage').classList.remove('hidden');
+
+            // Reset any display styles that might be overriding the classes
+            document.getElementById('dashboardPage').style.display = '';
+            document.getElementById('landingPage').style.display = '';
+
+            showMessage('Logged out successfully!', 'success');
         }
 
         function showDashboard() {
@@ -1374,14 +1902,28 @@
 
             currentPage = pageName;
 
-            // Load profile data if on profile page
-            if (pageName === 'profile' && dataStore.currentUser) {
-                const joinDate = new Date(dataStore.currentUser.joinDate).toISOString().split('T')[0];
-                document.getElementById('profileDisplayName').textContent = dataStore.currentUser.name;
+            // Load content based on the page
+            if (pageName === 'topics') {
+                loadTopics();
+            } else if (pageName === 'formulas') {
+                loadFormulas();
+            } else if (pageName === 'practice') {
+                loadPracticeTopics();
+            } else if (pageName === 'profile' && dataStore.currentUser) {
+                const joinDate = dataStore.currentUser.createdAt ?
+                    new Date(dataStore.currentUser.createdAt).toISOString().split('T')[0] :
+                    new Date().toISOString().split('T')[0];
+
+                // Use firstName and lastName if available, otherwise fallback to name
+                const displayName = dataStore.currentUser.firstName && dataStore.currentUser.lastName ?
+                    `${dataStore.currentUser.firstName} ${dataStore.currentUser.lastName}` :
+                    dataStore.currentUser.name || 'User';
+
+                document.getElementById('profileDisplayName').textContent = displayName;
                 document.getElementById('profileDisplayEmail').textContent = dataStore.currentUser.email;
                 document.getElementById('profileJoinDate').textContent = joinDate;
-                document.getElementById('profileInitial').textContent = dataStore.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('profileName').value = dataStore.currentUser.name;
+                document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
+                document.getElementById('profileName').value = displayName;
                 document.getElementById('profileEmail').value = dataStore.currentUser.email;
             }
         }
@@ -1593,34 +2135,56 @@
             const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
             const question = topic.problems[currentPractice.currentQuestion];
 
+            console.log('Showing question:', currentPractice.currentQuestion + 1);
+            console.log('Next button should be available');
+
             document.getElementById('practiceArea').innerHTML = `
-                <div class="max-w-2xl mx-auto">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
-                        <span class="text-gray-600">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
-                        <div class="space-y-3">
-                            ${question.options.map((option, index) => `
-                                <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all answer-option">
-                                    <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
-                                </button>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-between">
-                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium">
-                            Back to Topics
+        <div class="max-w-2xl mx-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
+                <span class="text-gray-600">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
+            </div>
+            
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
+                <div class="space-y-3" id="optionsContainer">
+                    ${question.options.map((option, index) => `
+                        <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all answer-option">
+                            <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
                         </button>
-                        <div class="text-gray-600">
-                            Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
-                        </div>
-                    </div>
+                    `).join('')}
                 </div>
-            `;
+            </div>
+            
+            <div class="flex justify-between items-center">                
+                <div class="text-gray-600">
+                    Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
+                </div>
+                
+                <button onclick="nextQuestion()" id="nextButton" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hidden">
+                    Next Question
+                </button>
+            </div>
+        </div>
+    `;
+
+            // Debug: Check if next button exists
+            setTimeout(() => {
+                const nextBtn = document.getElementById('nextButton');
+                console.log('Next button exists:', !!nextBtn);
+                console.log('Next button classes:', nextBtn?.className);
+            }, 100);
+        }
+
+        function nextQuestion() {
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+
+            currentPractice.currentQuestion++;
+            if (currentPractice.currentQuestion < topic.problems.length) {
+                showQuestion();
+            } else {
+                finishPractice();
+            }
         }
 
         function selectAnswer(selectedIndex) {
@@ -1637,7 +2201,6 @@
                 if (index === question.correct && !isCorrect) {
                     option.classList.add('correct');
                 }
-
                 option.style.pointerEvents = 'none';
             });
 
@@ -1648,25 +2211,27 @@
 
             // Show explanation only if wrong
             if (!isCorrect) {
-                const optionsContainer = document.querySelector('.mb-8 .space-y-3');
+                const optionsContainer = document.getElementById('optionsContainer');
                 const explanationDiv = document.createElement('div');
                 explanationDiv.className = 'mt-4 p-4 bg-red-50 border-l-4 border-red-400 rounded-r-lg';
                 explanationDiv.innerHTML = `
-                    <h4 class="font-semibold text-red-800 mb-2">Why is this wrong?</h4>
-                    <p class="text-red-700 text-sm">${question.explanation}</p>
-                `;
+            <h4 class="font-semibold text-red-800 mb-2">Why is this wrong?</h4>
+            <p class="text-red-700 text-sm">${question.explanation}</p>
+        `;
                 optionsContainer.insertAdjacentElement('afterend', explanationDiv);
             }
 
-            // Show next question or finish
-            setTimeout(() => {
-                currentPractice.currentQuestion++;
-                if (currentPractice.currentQuestion < topic.problems.length) {
-                    showQuestion();
-                } else {
-                    finishPractice();
-                }
-            }, 3000); // Increased timeout to 3s to allow reading the explanation
+            // Show next button instead of auto-advancing
+            const nextButton = document.getElementById('nextButton');
+            if (nextButton) {
+                nextButton.classList.remove('hidden');
+            }
+
+            // Update score display
+            const scoreElement = document.querySelector('.flex.justify-between.items-center .text-gray-600');
+            if (scoreElement) {
+                scoreElement.textContent = `Score: ${currentPractice.score}/${(currentPractice.currentQuestion + 1) * 10}`;
+            }
         }
 
         function finishPractice() {
@@ -1679,30 +2244,64 @@
             dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
 
             document.getElementById('practiceArea').innerHTML = `
-                <div class="text-center max-w-md mx-auto">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
-                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                        <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
-                        <p class="text-gray-600">Correct Answers</p>
-                        <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
-                    </div>
-                    <div class="space-y-3">
-                        <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
-                            Try Again
-                        </button>
-                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
-                            Back to Topics
-                        </button>
-                    </div>
-                </div>
-            `;
+        <div class="text-center max-w-md mx-auto">
+            <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
+            <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
+                <p class="text-gray-600">Correct Answers</p>
+                <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
+            </div>
+            <div class="space-y-3">
+                <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Try Again
+                </button>
+                <button onclick="manualBackToTopics()" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
+                    Back to Topics
+                </button>
+            </div>
+        </div>
+    `;
 
             currentPractice = null;
+        }
+
+        function manualBackToTopics() {
+            console.log('Manual back to topics page');
+
+            // Hide all content sections
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            contents.forEach(content => {
+                const element = document.getElementById(content);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            });
+
+            // Show TOPICS content (not practice)
+            const topicsContent = document.getElementById('topicsContent');
+            if (topicsContent) {
+                topicsContent.classList.remove('hidden');
+            }
+
+            // Load the topics (this will show the learning topics)
+            loadTopics();
+
+            // Update page info to show Topics page
+            document.getElementById('pageTitle').textContent = 'Learning Topics';
+            document.getElementById('pageSubtitle').textContent = 'Explore discrete mathematics concepts';
+
+            // Update sidebar to highlight Topics
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[onclick="showPage(\'topics\')"]').classList.add('active');
+
+            console.log('Manual back to topics page completed');
         }
 
         // Profile functions (now uses the updated method in DataStore)
@@ -1776,14 +2375,74 @@
             }
         });
 
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(iconId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Change to eye-off icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                `;
+                eyeIcon.classList.add('rotate-12');
+            } else {
+                passwordInput.type = 'password';
+                // Change back to eye icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                `;
+                eyeIcon.classList.remove('rotate-12');
+            }
+        }
+
+        // Close Sign Up modal when clicking outside
+        document.getElementById('signUpModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignUp();
+            }
+        });
+
+        // Close Sign In modal when clicking outside
+        document.getElementById('signInModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignIn();
+            }
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
             });
+
+            // Check if user is already logged in using both methods
+            let currentUser = getCurrentUser();
+
+            if (!currentUser) {
+                // Fallback: check dataStore currentUser
+                currentUser = dataStore.currentUser;
+            }
+
+            if (currentUser) {
+                // Ensure user exists in dataStore
+                if (!dataStore.users.has(currentUser.email)) {
+                    dataStore.users.set(currentUser.email, currentUser);
+                }
+                dataStore.currentUser = currentUser;
+
+                // Initialize activities if needed
+                if (!dataStore.userActivities.has(currentUser.email)) {
+                    dataStore.userActivities.set(currentUser.email, []);
+                }
+
+                switchToDashboard();
+            }
         });
     </script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'989499e4c3a44463',t:'MTc1OTU4MDA4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
+
 </html>
