@@ -265,6 +265,33 @@ select:focus {
     display: none !important;
 }
 
+/* Progress dashboard styles */
+.progress-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+}
+
+.progress-bar-animated {
+    transition: all 0.8s ease-in-out;
+}
+
+.accuracy-high { background: linear-gradient(135deg, #10B981, #059669); }
+.accuracy-medium { background: linear-gradient(135deg, #F59E0B, #D97706); }
+.accuracy-low { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+/* Smooth animations for progress updates */
+@keyframes progressFill {
+    from { width: 0%; }
+    to { width: var(--target-width); }
+}
+
+.progress-fill {
+    animation: progressFill 1.5s ease-out forwards;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {

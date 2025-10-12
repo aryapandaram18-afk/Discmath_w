@@ -1159,6 +1159,36 @@
                 this.loadFromStorage();
             }
 
+            // streak
+            initializeStreak() {
+                if (!this.currentUser) return;
+
+                const today = new Date().toDateString();
+                const lastLogin = this.currentUser.lastLogin ? new Date(this.currentUser.lastLogin).toDateString() : null;
+
+                // Initialize streak if it doesn't exist
+                if (this.currentUser.streak === undefined) {
+                    this.currentUser.streak = 0;
+                }
+
+                // If last login was yesterday, increment streak
+                if (lastLogin) {
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+
+                    if (lastLogin === yesterday.toDateString()) {
+                        this.currentUser.streak += 1;
+                    } else if (lastLogin !== today) {
+                        // Reset streak if missed a day
+                        this.currentUser.streak = 0;
+                    }
+                }
+
+                // Update last login
+                this.currentUser.lastLogin = new Date().toISOString();
+                this.saveToStorage();
+            }
+
             // Persist data to localStorage using simple JSON serialization
             saveToStorage() {
                 try {
@@ -1216,7 +1246,8 @@
                     score: 0,
                     completedTopics: 0,
                     streak: 0,
-                    joinDate: new Date().toISOString()
+                    joinDate: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
                 };
                 this.users.set(userData.email, this.currentUser);
 
@@ -1248,21 +1279,44 @@
             }
 
             // Update topic completion
+            // completeTopicProblem(topicId, score) {
+            //     const topic = this.topics.find(t => t.id === topicId);
+            //     if (topic && this.currentUser) {
+            //         if (!topic.completed) {
+            //             topic.completed = true;
+            //             this.currentUser.completedTopics++;
+            //             this.addActivity({
+            //                 type: 'topic_completed',
+            //                 message: `Completed ${topic.name}`,
+            //                 score: score
+            //             });
+            //         }
+            //         this.currentUser.score += score;
+            //         this.updateUI();
+            //         this.saveToStorage(); // Persist after update
+            //     }
+            // }
+            // In DataStore class, replace the completeTopicProblem method with this:
             completeTopicProblem(topicId, score) {
                 const topic = this.topics.find(t => t.id === topicId);
                 if (topic && this.currentUser) {
+                    // Update score - make sure it accumulates properly
+                    this.currentUser.score = (this.currentUser.score || 0) + score;
+
+                    // Mark topic as completed if not already
                     if (!topic.completed) {
                         topic.completed = true;
-                        this.currentUser.completedTopics++;
-                        this.addActivity({
-                            type: 'topic_completed',
-                            message: `Completed ${topic.name}`,
-                            score: score
-                        });
+                        this.currentUser.completedTopics = (this.currentUser.completedTopics || 0) + 1;
                     }
-                    this.currentUser.score += score;
+
+                    this.addActivity({
+                        type: 'topic_completed',
+                        message: `Completed ${topic.name}`,
+                        score: score
+                    });
+
                     this.updateUI();
-                    this.saveToStorage(); // Persist after update
+                    this.saveToStorage();
                 }
             }
 
@@ -1630,6 +1684,8 @@
             dataStore.currentUser = userData;
             dataStore.users.set(emailVal, userData);
 
+            dataStore.initializeStreak();
+
             // Initialize activities for new user
             if (!dataStore.userActivities.has(emailVal)) {
                 dataStore.userActivities.set(emailVal, []);
@@ -1720,6 +1776,8 @@
             if (!dataStore.users.has(user.email)) {
                 dataStore.users.set(user.email, user);
             }
+
+            dataStore.initializeStreak();
 
             // Initialize activities if needed
             if (!dataStore.userActivities.has(user.email)) {
@@ -2161,7 +2219,7 @@
                     Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
                 </div>
                 
-                <button onclick="nextQuestion()" id="nextButton" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hidden">
+                <button onclick="nextQuestion()" id="nextButton" class="primary-btn text-white px-6 py-2 rounded-lg font-medium hidden">
                     Next Question
                 </button>
             </div>
@@ -2234,6 +2292,42 @@
             }
         }
 
+        //     function finishPractice() {
+        //         const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+        //         const totalQuestions = topic.problems.length;
+        //         const correctAnswers = currentPractice.answers.filter((answer, index) =>
+        //             answer === topic.problems[index].correct
+        //         ).length;
+
+        //         dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
+
+        //         document.getElementById('practiceArea').innerHTML = `
+        //     <div class="text-center max-w-md mx-auto">
+        //         <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
+        //             <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        //                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
+        //             </svg>
+        //         </div>
+        //         <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
+        //         <div class="bg-gray-50 rounded-lg p-6 mb-6">
+        //             <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
+        //             <p class="text-gray-600">Correct Answers</p>
+        //             <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
+        //         </div>
+        //         <div class="space-y-3">
+        //             <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+        //                 Try Again
+        //             </button>
+        //             <button onclick="manualBackToTopics()" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
+        //                 Back to Topics
+        //             </button>
+        //         </div>
+        //     </div>
+        // `;
+
+        //         currentPractice = null;
+        //     }
+
         function finishPractice() {
             const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
             const totalQuestions = topic.problems.length;
@@ -2241,7 +2335,11 @@
                 answer === topic.problems[index].correct
             ).length;
 
-            dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
+            // Calculate final score (10 points per correct answer)
+            const finalScore = correctAnswers * 10;
+
+            // Update user progress and score - THIS WAS THE MAIN ISSUE
+            dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
 
             document.getElementById('practiceArea').innerHTML = `
         <div class="text-center max-w-md mx-auto">
@@ -2254,7 +2352,7 @@
             <div class="bg-gray-50 rounded-lg p-6 mb-6">
                 <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
                 <p class="text-gray-600">Correct Answers</p>
-                <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
+                <div class="text-xl font-semibold text-green-600 mt-2">+${finalScore} Points</div>
             </div>
             <div class="space-y-3">
                 <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
@@ -2433,6 +2531,8 @@
                     dataStore.users.set(currentUser.email, currentUser);
                 }
                 dataStore.currentUser = currentUser;
+
+                dataStore.initializeStreak();
 
                 // Initialize activities if needed
                 if (!dataStore.userActivities.has(currentUser.email)) {
