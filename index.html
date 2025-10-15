@@ -1,5 +1,3 @@
-<!-- hello  -->
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -78,24 +76,6 @@
                     problems
                 </p>
 
-                <!-- <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 fade-in">
-                    <button onclick="showSignIn();"
-                        class="primary-btn text-white px-10 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span>Start Learning</span>
-                    </button>
-                    <button onclick="continueAsGuest();"
-                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-10 py-4 rounded-xl text-lg font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                        <span>Try as Guest</span>
-                    </button>
-                </div> -->
 
                 <!-- Feature highlights -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto fade-in">
@@ -368,6 +348,16 @@
                         </svg>
                         <span>Practice</span>
                     </a>
+                    <!-- In the sidebar navigation, add this after the Practice link -->
+                    <a href="#" onclick="showPage('progress')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                        <span>Progress</span>
+                    </a>
                     <a href="#" onclick="showPage('profile')"
                         class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -578,6 +568,173 @@
                 </div>
             </div>
 
+            <!-- Progress Content -->
+            <div id="progressContent" class="hidden p-6">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Progress Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Learning Progress</h1>
+                        <p class="text-gray-600">Track your journey through discrete mathematics</p>
+                    </div>
+
+                    <!-- Progress Overview Cards -->
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <!-- Overall Progress -->
+                        <div class="progress-dashboard card p-6 relative">
+                            <div class="relative z-10">
+                                <h3 class="text-white font-semibold mb-4">Overall Progress</h3>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="progress-level" id="overallProgressPercent">0%</div>
+                                        <p class="text-blue-100 text-sm">Mastery Level</p>
+                                    </div>
+                                    <div class="relative w-16 h-16">
+                                        <svg class="progress-ring w-16 h-16" width="64" height="64">
+                                            <circle class="text-white opacity-20" stroke-width="6" stroke="currentColor"
+                                                fill="transparent" r="24" cx="32" cy="32" />
+                                            <circle class="progress-ring-circle text-white" stroke-width="6"
+                                                stroke-dasharray="150.8" stroke-dashoffset="150.8"
+                                                stroke-linecap="round" stroke="currentColor" fill="transparent" r="24"
+                                                cx="32" cy="32" id="overallProgressRing" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-white text-sm font-bold"
+                                                id="completedTopicsCount">0/8</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practice Score -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Practice Score</h3>
+                                <div class="progress-badge px-3 py-1 rounded-full text-xs font-medium">
+                                    Total
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-600 mb-2" id="totalPracticeScore">0</div>
+                            <p class="text-gray-600 text-sm">Points earned</p>
+                        </div>
+
+                        <!-- Study Streak -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Study Streak</h3>
+                                <div
+                                    class="progress-badge px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
+                                    Active
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-orange-600 mb-2" id="currentStreak">0</div>
+                            <p class="text-gray-600 text-sm">Consecutive days</p>
+                        </div>
+
+                        <!-- Accuracy Rate -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Accuracy</h3>
+                                <div class="progress-badge px-3 py-1 rounded-full text-xs font-medium"
+                                    id="accuracyBadge">
+                                    -
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-green-600 mb-2" id="accuracyRate">0%</div>
+                            <p class="text-gray-600 text-sm">Practice problems</p>
+                        </div>
+                    </div>
+
+                    <!-- Learning Journey -->
+                    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                        <!-- Topics Progress -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Topics Progress</h3>
+                            <div class="space-y-4" id="topicsProgressList">
+                                <!-- Topics progress will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Learning Statistics -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Learning Statistics</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Topics Started</span>
+                                        <span class="font-semibold" id="topicsStarted">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" id="topicsStartedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Topics Completed</span>
+                                        <span class="font-semibold" id="topicsCompleted">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" id="topicsCompletedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Practice Problems Solved</span>
+                                        <span class="font-semibold" id="problemsSolved">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" id="problemsSolvedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Learning Time</span>
+                                        <span class="font-semibold" id="learningTime">0h</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-orange-500 h-2 rounded-full" id="learningTimeBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements & Milestones -->
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Achievements -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Achievements</h3>
+                            <div class="space-y-4" id="achievementsList">
+                                <!-- Achievements will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Learning Milestones -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Learning Milestones</h3>
+                            <div class="space-y-4" id="milestonesList">
+                                <!-- Milestones will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Actions -->
+                    <div class="mt-8 flex justify-center">
+                        <button onclick="exportProgressReport()"
+                            class="primary-btn text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            <span>Export Progress Report</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Profile Content -->
             <div id="profileContent" class="hidden p-6">
@@ -1278,24 +1435,6 @@
                 this.saveToStorage(); // Persist activities
             }
 
-            // Update topic completion
-            // completeTopicProblem(topicId, score) {
-            //     const topic = this.topics.find(t => t.id === topicId);
-            //     if (topic && this.currentUser) {
-            //         if (!topic.completed) {
-            //             topic.completed = true;
-            //             this.currentUser.completedTopics++;
-            //             this.addActivity({
-            //                 type: 'topic_completed',
-            //                 message: `Completed ${topic.name}`,
-            //                 score: score
-            //             });
-            //         }
-            //         this.currentUser.score += score;
-            //         this.updateUI();
-            //         this.saveToStorage(); // Persist after update
-            //     }
-            // }
             // In DataStore class, replace the completeTopicProblem method with this:
             completeTopicProblem(topicId, score) {
                 const topic = this.topics.find(t => t.id === topicId);
@@ -1401,7 +1540,8 @@
             topics: { title: 'Learning Topics', subtitle: 'Explore discrete mathematics concepts' },
             formulas: { title: 'Formula Reference', subtitle: 'Quick reference for important formulas' },
             practice: { title: 'Practice Problems', subtitle: 'Test your understanding with problems' },
-            profile: { title: 'Profile Settings', subtitle: 'Manage your account preferences' }
+            profile: { title: 'Profile Settings', subtitle: 'Manage your account preferences' },
+            progress: { title: 'Learning Progress', subtitle: 'Track your learning journey and achievements' }
         };
 
         // Authentication functions
@@ -2044,15 +2184,42 @@
             container.innerHTML = html;
         }
 
-        // Load practice topics
         function loadPracticeTopics() {
             const container = document.getElementById('practiceTopics');
-            container.innerHTML = dataStore.topics.filter(topic => topic.problems.length > 0).map(topic => `
-                <button onclick="startPractice(${topic.id})" class="card p-4 text-left hover:scale-105 transition-all">
-                    <h4 class="font-semibold text-gray-900 mb-2">${topic.name}</h4>
-                    <p class="text-gray-600 text-sm">${topic.problems.length} problems available</p>
-                </button>
-            `).join('');
+            if (!container) return;
+
+            container.innerHTML = dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).map(topic => `
+        <button onclick="startPractice(${topic.id})" class="card p-6 text-left hover:scale-105 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-semibold text-gray-900 text-lg">${topic.name}</h4>
+                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">
+                    ${topic.problems.length} problems
+                </span>
+            </div>
+            <p class="text-gray-600 mb-4">${topic.description}</p>
+            <div class="flex items-center text-sm text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>~${Math.ceil(topic.problems.length * 2)} min</span>
+            </div>
+        </button>
+    `).join('');
+
+            // If no practice topics available, show message
+            if (dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).length === 0) {
+                container.innerHTML = `
+            <div class="col-span-2 text-center py-12">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">No Practice Problems Available</h3>
+                <p class="text-gray-600">Practice problems for topics are coming soon!</p>
+            </div>
+        `;
+            }
         }
 
         // Learning function
@@ -2173,65 +2340,90 @@
         }
 
         function startPractice(topicId) {
+            console.log('Starting practice for topic:', topicId);
+
             const topic = dataStore.topics.find(t => t.id === topicId);
-            if (!topic || topic.problems.length === 0) {
+            if (!topic) {
+                console.error('Topic not found:', topicId);
+                showMessage('Topic not found!', 'error');
+                return;
+            }
+
+            if (!topic.problems || topic.problems.length === 0) {
+                console.log('No problems for topic:', topic.name);
                 showMessage('No practice problems available for this topic yet.', 'info');
                 return;
             }
+
+            console.log('Found topic:', topic.name, 'with problems:', topic.problems.length);
 
             currentPractice = {
                 topicId: topicId,
                 currentQuestion: 0,
                 score: 0,
-                answers: []
+                answers: [],
+                topicName: topic.name
             };
 
             showQuestion();
         }
 
         function showQuestion() {
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-            const question = topic.problems[currentPractice.currentQuestion];
+            if (!currentPractice) {
+                console.error('No current practice session');
+                return;
+            }
 
-            console.log('Showing question:', currentPractice.currentQuestion + 1);
-            console.log('Next button should be available');
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            if (!topic || !topic.problems || topic.problems.length === 0) {
+                console.error('Topic or problems not found for topic ID:', currentPractice.topicId);
+                showMessage('Practice problems not available for this topic.', 'error');
+                return;
+            }
+
+            const question = topic.problems[currentPractice.currentQuestion];
+            if (!question) {
+                console.error('Question not found at index:', currentPractice.currentQuestion);
+                return;
+            }
+
+            console.log('Showing question for topic:', topic.name, 'Question:', currentPractice.currentQuestion + 1);
 
             document.getElementById('practiceArea').innerHTML = `
         <div class="max-w-2xl mx-auto">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
-                <span class="text-gray-600">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
+                    <p class="text-gray-600">${topic.description}</p>
+                </div>
+                <span class="text-gray-600 bg-gray-100 px-3 py-1 rounded-full">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
             </div>
             
-            <div class="mb-8">
+            <div class="card p-6 mb-8">
                 <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
                 <div class="space-y-3" id="optionsContainer">
                     ${question.options.map((option, index) => `
-                        <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all answer-option">
-                            <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
+                        <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 answer-option">
+                            <span class="font-medium text-purple-600">${String.fromCharCode(65 + index)}.</span> 
+                            <span class="ml-2">${option}</span>
                         </button>
                     `).join('')}
                 </div>
             </div>
             
-            <div class="flex justify-between items-center">                
-                <div class="text-gray-600">
-                    Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
+            <div class="flex justify-between items-center">
+                <div class="text-gray-600 font-medium">
+                    Score: <span class="text-purple-600">${currentPractice.score}</span> points
                 </div>
                 
                 <button onclick="nextQuestion()" id="nextButton" class="primary-btn text-white px-6 py-2 rounded-lg font-medium hidden">
-                    Next Question
+                    ${currentPractice.currentQuestion === topic.problems.length - 1 ? 'Finish Practice' : 'Next Question'}
                 </button>
             </div>
         </div>
     `;
 
-            // Debug: Check if next button exists
-            setTimeout(() => {
-                const nextBtn = document.getElementById('nextButton');
-                console.log('Next button exists:', !!nextBtn);
-                console.log('Next button classes:', nextBtn?.className);
-            }, 100);
+            console.log('Question displayed successfully');
         }
 
         function nextQuestion() {
@@ -2292,56 +2484,20 @@
             }
         }
 
-        //     function finishPractice() {
-        //         const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-        //         const totalQuestions = topic.problems.length;
-        //         const correctAnswers = currentPractice.answers.filter((answer, index) =>
-        //             answer === topic.problems[index].correct
-        //         ).length;
-
-        //         dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
-
-        //         document.getElementById('practiceArea').innerHTML = `
-        //     <div class="text-center max-w-md mx-auto">
-        //         <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
-        //             <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        //                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
-        //             </svg>
-        //         </div>
-        //         <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
-        //         <div class="bg-gray-50 rounded-lg p-6 mb-6">
-        //             <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
-        //             <p class="text-gray-600">Correct Answers</p>
-        //             <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
-        //         </div>
-        //         <div class="space-y-3">
-        //             <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
-        //                 Try Again
-        //             </button>
-        //             <button onclick="manualBackToTopics()" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
-        //                 Back to Topics
-        //             </button>
-        //         </div>
-        //     </div>
-        // `;
-
-        //         currentPractice = null;
-        //     }
-
         function finishPractice() {
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-            const totalQuestions = topic.problems.length;
-            const correctAnswers = currentPractice.answers.filter((answer, index) =>
-                answer === topic.problems[index].correct
-            ).length;
+    const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+    const totalQuestions = topic.problems.length;
+    const correctAnswers = currentPractice.answers.filter((answer, index) =>
+        answer === topic.problems[index].correct
+    ).length;
 
-            // Calculate final score (10 points per correct answer)
-            const finalScore = correctAnswers * 10;
+    // Calculate final score (10 points per correct answer)
+    const finalScore = correctAnswers * 10;
 
-            // Update user progress and score - THIS WAS THE MAIN ISSUE
-            dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
+    // Update user progress and score
+    dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
 
-            document.getElementById('practiceArea').innerHTML = `
+    document.getElementById('practiceArea').innerHTML = `
         <div class="text-center max-w-md mx-auto">
             <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
                 <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2349,24 +2505,26 @@
                 </svg>
             </div>
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
+            <p class="text-gray-600 mb-6">You've completed <span class="font-semibold">${topic.name}</span> practice</p>
             <div class="bg-gray-50 rounded-lg p-6 mb-6">
                 <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
                 <p class="text-gray-600">Correct Answers</p>
                 <div class="text-xl font-semibold text-green-600 mt-2">+${finalScore} Points</div>
+                <div class="text-sm text-gray-500 mt-2">Accuracy: ${Math.round((correctAnswers / totalQuestions) * 100)}%</div>
             </div>
             <div class="space-y-3">
                 <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
                     Try Again
                 </button>
-                <button onclick="manualBackToTopics()" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
-                    Back to Topics
+                <button onclick="showPage('topics')" class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 rounded-lg font-medium">
+                    Back to All Topics
                 </button>
             </div>
         </div>
     `;
 
-            currentPractice = null;
-        }
+    currentPractice = null;
+}
 
         function manualBackToTopics() {
             console.log('Manual back to topics page');
@@ -2493,6 +2651,343 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                 `;
                 eyeIcon.classList.remove('rotate-12');
+            }
+        }
+
+
+        // Progress tracking functions
+        function updateProgressDashboard() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            const totalTopics = dataStore.topics.length;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const startedTopics = dataStore.topics.filter(topic => topic.viewed).length;
+            const progressPercent = Math.round((completedTopics / totalTopics) * 100);
+
+            // Update overall progress
+            document.getElementById('overallProgressPercent').textContent = `${progressPercent}%`;
+            document.getElementById('completedTopicsCount').textContent = `${completedTopics}/${totalTopics}`;
+
+            // Update progress ring
+            const circumference = 2 * Math.PI * 24;
+            const offset = circumference - (progressPercent / 100) * circumference;
+            const progressRing = document.getElementById('overallProgressRing');
+            if (progressRing) {
+                progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+                progressRing.style.strokeDashoffset = offset;
+            }
+
+            // Update other metrics
+            document.getElementById('totalPracticeScore').textContent = user.score || 0;
+            document.getElementById('currentStreak').textContent = user.streak || 0;
+
+            // Calculate accuracy
+            const accuracy = calculateAccuracy();
+            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+
+            // Update accuracy badge
+            const accuracyBadge = document.getElementById('accuracyBadge');
+            if (accuracy >= 80) {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-600';
+                accuracyBadge.textContent = 'Excellent';
+            } else if (accuracy >= 60) {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600';
+                accuracyBadge.textContent = 'Good';
+            } else {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-600';
+                accuracyBadge.textContent = 'Needs Work';
+            }
+
+            // Update learning statistics
+            updateLearningStatistics(startedTopics, completedTopics, totalTopics);
+
+            // Update topics progress
+            updateTopicsProgress();
+
+            // Update achievements
+            updateAchievements();
+
+            // Update milestones
+            updateMilestones();
+        }
+
+        function updateLearningStatistics(started, completed, total) {
+            document.getElementById('topicsStarted').textContent = `${started}/${total}`;
+            document.getElementById('topicsCompleted').textContent = `${completed}/${total}`;
+
+            // Calculate problems solved (estimate based on score)
+            const problemsSolved = Math.floor((dataStore.currentUser.score || 0) / 10);
+            document.getElementById('problemsSolved').textContent = problemsSolved;
+
+            // Estimate learning time (1 hour per topic started + 30 min per completed topic)
+            const learningHours = started * 1 + completed * 0.5;
+            document.getElementById('learningTime').textContent = `${learningHours.toFixed(1)}h`;
+
+            // Update progress bars
+            document.getElementById('topicsStartedBar').style.width = `${(started / total) * 100}%`;
+            document.getElementById('topicsCompletedBar').style.width = `${(completed / total) * 100}%`;
+            document.getElementById('problemsSolvedBar').style.width = `${Math.min(100, (problemsSolved / 50) * 100)}%`;
+            document.getElementById('learningTimeBar').style.width = `${Math.min(100, (learningHours / 20) * 100)}%`;
+        }
+
+        function calculateAccuracy() {
+            const user = dataStore.currentUser;
+            if (!user || user.score === 0) return 0;
+
+            // Estimate accuracy based on score and completed topics
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const maxPossibleScore = completedTopics * 50;
+
+            if (maxPossibleScore === 0) return 0;
+
+            return Math.min(100, Math.round((user.score / maxPossibleScore) * 100));
+        }
+
+        function updateTopicsProgress() {
+            const container = document.getElementById('topicsProgressList');
+            if (!container) return;
+
+            container.innerHTML = dataStore.topics.map(topic => {
+                const statusClass = topic.completed ? 'completed' :
+                    topic.viewed ? 'in-progress' : 'not-started';
+                const statusText = topic.completed ? 'Completed' :
+                    topic.viewed ? 'In Progress' : 'Not Started';
+                const statusColor = topic.completed ? 'text-green-600' :
+                    topic.viewed ? 'text-yellow-600' : 'text-gray-500';
+
+                return `
+            <div class="progress-topic-item ${statusClass} p-4 rounded-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <span class="text-gray-600 font-semibold">${topic.id}</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">${topic.name}</h4>
+                            <p class="text-gray-600 text-sm">${topic.description}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="${statusColor} font-medium">${statusText}</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2">
+                            <div class="bg-${topic.completed ? 'green' : topic.viewed ? 'yellow' : 'gray'}-500 h-2 rounded-full transition-all duration-500" 
+                                  style="width: ${topic.completed ? '100' : topic.viewed ? '50' : '0'}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+            }).join('');
+        }
+
+        function updateAchievements() {
+            const container = document.getElementById('achievementsList');
+            if (!container) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+
+            const achievements = [
+                {
+                    id: 1,
+                    name: 'First Steps',
+                    description: 'Complete your first topic',
+                    icon: '🚀',
+                    unlocked: completedTopics >= 1,
+                    progress: completedTopics >= 1 ? 100 : 0
+                },
+                {
+                    id: 2,
+                    name: 'Halfway There',
+                    description: 'Complete 50% of topics',
+                    icon: '🎯',
+                    unlocked: completedTopics >= totalTopics / 2,
+                    progress: Math.min(100, (completedTopics / (totalTopics / 2)) * 100)
+                },
+                {
+                    id: 3,
+                    name: 'Practice Master',
+                    description: 'Score 1000+ points',
+                    icon: '🏆',
+                    unlocked: (user.score || 0) >= 1000,
+                    progress: Math.min(100, ((user.score || 0) / 1000) * 100)
+                },
+                {
+                    id: 4,
+                    name: 'Consistent Learner',
+                    description: '7-day study streak',
+                    icon: '🔥',
+                    unlocked: (user.streak || 0) >= 7,
+                    progress: Math.min(100, ((user.streak || 0) / 7) * 100)
+                },
+                {
+                    id: 5,
+                    name: 'Discrete Math Pro',
+                    description: 'Complete all topics',
+                    icon: '⭐',
+                    unlocked: completedTopics === totalTopics,
+                    progress: Math.min(100, (completedTopics / totalTopics) * 100)
+                },
+                {
+                    id: 6,
+                    name: 'Accuracy Champion',
+                    description: 'Achieve 90%+ accuracy',
+                    icon: '🎯',
+                    unlocked: calculateAccuracy() >= 90,
+                    progress: Math.min(100, calculateAccuracy())
+                }
+            ];
+
+            container.innerHTML = achievements.map(achievement => `
+        <div class="progress-achievement p-4 rounded-lg ${achievement.unlocked ? '' : 'achievement-locked'}">
+            <div class="flex items-center space-x-3 mb-3">
+                <div class="text-2xl">${achievement.icon}</div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 ${achievement.unlocked ? '' : 'text-gray-500'}">${achievement.name}</h4>
+                    <p class="text-gray-600 text-sm">${achievement.description}</p>
+                </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full transition-all duration-500" 
+                      style="width: ${achievement.progress}%"></div>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+                <span class="text-xs text-gray-500">${achievement.unlocked ? 'Unlocked' : 'Locked'}</span>
+                <span class="text-xs font-medium">${Math.round(achievement.progress)}%</span>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        function updateMilestones() {
+            const container = document.getElementById('milestonesList');
+            if (!container) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+
+            const milestones = [
+                { name: 'Start First Topic', completed: dataStore.topics.some(t => t.viewed) },
+                { name: 'Complete Set Theory', completed: dataStore.topics[0]?.completed },
+                { name: 'Complete Logic & Proofs', completed: dataStore.topics[1]?.completed },
+                { name: 'Score 500 Points', completed: (user.score || 0) >= 500 },
+                { name: '3-Day Streak', completed: (user.streak || 0) >= 3 },
+                { name: 'Complete All Topics', completed: completedTopics === totalTopics }
+            ];
+
+            container.innerHTML = milestones.map(milestone => `
+        <div class="flex items-center justify-between p-3 border-b border-gray-200 last:border-b-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full flex items-center justify-center ${milestone.completed ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400'
+                }">
+                    ${milestone.completed ? '✓' : ''}
+                </div>
+                <span class="${milestone.completed ? 'text-gray-900' : 'text-gray-500'}">${milestone.name}</span>
+            </div>
+            <span class="text-sm ${milestone.completed ? 'text-green-600' : 'text-gray-400'}">
+                ${milestone.completed ? 'Completed' : 'Pending'}
+            </span>
+        </div>
+    `).join('');
+        }
+
+        function exportProgressReport() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+            const progressPercent = Math.round((completedTopics / totalTopics) * 100);
+
+            const report = `
+DiscMath Companion - Progress Report
+====================================
+
+Student: ${user.name || 'User'}
+Email: ${user.email}
+Report Date: ${new Date().toLocaleDateString()}
+
+OVERALL PROGRESS
+----------------
+Completion: ${progressPercent}% (${completedTopics}/${totalTopics} topics)
+Total Score: ${user.score || 0} points
+Study Streak: ${user.streak || 0} days
+Accuracy Rate: ${calculateAccuracy()}%
+
+TOPICS PROGRESS
+---------------
+${dataStore.topics.map(topic =>
+                `${topic.completed ? '✓' : topic.viewed ? '→' : '○'} ${topic.name} - ${topic.completed ? 'Completed' : topic.viewed ? 'In Progress' : 'Not Started'}`
+            ).join('\n')}
+
+ACHIEVEMENTS
+------------
+${dataStore.topics.filter(t => t.completed).length >= 1 ? '✓ First Steps - Complete your first topic' : '○ First Steps'}
+${dataStore.topics.filter(t => t.completed).length >= totalTopics / 2 ? '✓ Halfway There - Complete 50% of topics' : '○ Halfway There'}
+${(user.score || 0) >= 1000 ? '✓ Practice Master - Score 1000+ points' : '○ Practice Master'}
+${(user.streak || 0) >= 7 ? '✓ Consistent Learner - 7-day study streak' : '○ Consistent Learner'}
+
+Keep up the great work! Continue your discrete mathematics journey.
+    `.trim();
+
+            // Create and download the report as a text file
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `discmath-progress-report-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showMessage('Progress report exported successfully!', 'success');
+        }
+
+        // Update the showPage function to handle progress page
+        function showPage(pageName) {
+            // Hide all content
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'progressContent', 'profileContent'];
+            contents.forEach(content => {
+                document.getElementById(content).classList.add('hidden');
+            });
+
+            // Also hide learning content if it exists
+            const learningContainer = document.getElementById('learningContent');
+            if (learningContainer) {
+                learningContainer.classList.add('hidden');
+            }
+
+            // Show selected content
+            document.getElementById(pageName + 'Content').classList.remove('hidden');
+
+            // Update page info
+            const info = pageInfo[pageName];
+            document.getElementById('pageTitle').textContent = info.title;
+            document.getElementById('pageSubtitle').textContent = info.subtitle;
+
+            // Update sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[onclick="showPage('${pageName}')"]`).classList.add('active');
+
+            currentPage = pageName;
+
+            // Load content based on the page
+            if (pageName === 'topics') {
+                loadTopics();
+            } else if (pageName === 'formulas') {
+                loadFormulas();
+            } else if (pageName === 'practice') {
+                loadPracticeTopics();
+            } else if (pageName === 'progress') {
+                updateProgressDashboard();
+            } else if (pageName === 'profile' && dataStore.currentUser) {
+                // ... existing profile code ...
             }
         }
 
