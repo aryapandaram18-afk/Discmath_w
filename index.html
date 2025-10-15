@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2108,22 +2107,35 @@
             } else if (pageName === 'practice') {
                 loadPracticeTopics();
             } else if (pageName === 'profile' && dataStore.currentUser) {
-                const joinDate = dataStore.currentUser.createdAt ?
-                    new Date(dataStore.currentUser.createdAt).toISOString().split('T')[0] :
-                    new Date().toISOString().split('T')[0];
-
-                // Use firstName and lastName if available, otherwise fallback to name
-                const displayName = dataStore.currentUser.firstName && dataStore.currentUser.lastName ?
-                    `${dataStore.currentUser.firstName} ${dataStore.currentUser.lastName}` :
-                    dataStore.currentUser.name || 'User';
-
-                document.getElementById('profileDisplayName').textContent = displayName;
-                document.getElementById('profileDisplayEmail').textContent = dataStore.currentUser.email;
-                document.getElementById('profileJoinDate').textContent = joinDate;
-                document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
-                document.getElementById('profileName').value = displayName;
-                document.getElementById('profileEmail').value = dataStore.currentUser.email;
+                loadProfileData();
             }
+        }
+
+        // Load profile data
+        function loadProfileData() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            
+            // Format join date
+            const joinDate = user.createdAt ? 
+                new Date(user.createdAt).toISOString().split('T')[0] : 
+                new Date().toISOString().split('T')[0];
+
+            // Get display name (use firstName + lastName if available, otherwise fallback to name)
+            const displayName = user.firstName && user.lastName ? 
+                `${user.firstName} ${user.lastName}` : 
+                user.name || 'User';
+
+            // Update profile display elements
+            document.getElementById('profileDisplayName').textContent = displayName;
+            document.getElementById('profileDisplayEmail').textContent = user.email;
+            document.getElementById('profileJoinDate').textContent = joinDate;
+            document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
+            
+            // Update form fields
+            document.getElementById('profileName').value = displayName;
+            document.getElementById('profileEmail').value = user.email;
         }
 
         // Load topics
@@ -2987,7 +2999,7 @@ Keep up the great work! Continue your discrete mathematics journey.
             } else if (pageName === 'progress') {
                 updateProgressDashboard();
             } else if (pageName === 'profile' && dataStore.currentUser) {
-                // ... existing profile code ...
+                loadProfileData();
             }
         }
 
