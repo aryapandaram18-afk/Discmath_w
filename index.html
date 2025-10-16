@@ -1,6 +1,4 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +13,7 @@
     <!-- Landing Page -->
     <div id="landingPage" class="gradient-bg min-h-screen">
         <!-- Header -->
-        <nav class="p-6 relative z-10">
+        <nav class="p-6 relative z-50">
             <div class="flex justify-between items-center max-w-6xl mx-auto">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -26,6 +24,27 @@
                         </svg>
                     </div>
                     <span class="text-white text-xl font-semibold">DiscMath Companion</span>
+                </div>
+
+                <div class="flex items-center space-x-4 relative z-50">
+                    <button onclick="showSignIn();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                        <span>Sign In</span>
+                    </button>
+                    <button onclick="showSignUp();"
+                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                            </path>
+                        </svg>
+                        <span>Sign Up</span>
+                    </button>
                 </div>
 
             </div>
@@ -56,24 +75,6 @@
                     problems
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16 fade-in">
-                    <button onclick="showLogin()"
-                        class="primary-btn text-white px-10 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span>Start Learning</span>
-                    </button>
-                    <button onclick="continueAsGuest()"
-                        class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-10 py-4 rounded-xl text-lg font-semibold hover:bg-opacity-30 border border-white border-opacity-30 transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                        <span>Try as Guest</span>
-                    </button>
-                </div>
 
                 <!-- Feature highlights -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto fade-in">
@@ -346,6 +347,16 @@
                         </svg>
                         <span>Practice</span>
                     </a>
+                    <!-- In the sidebar navigation, add this after the Practice link -->
+                    <a href="#" onclick="showPage('progress')"
+                        class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                        <span>Progress</span>
+                    </a>
                     <a href="#" onclick="showPage('profile')"
                         class="sidebar-item flex items-center space-x-3 p-3 text-gray-300 hover:text-white rounded-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -556,6 +567,173 @@
                 </div>
             </div>
 
+            <!-- Progress Content -->
+            <div id="progressContent" class="hidden p-6">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Progress Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Learning Progress</h1>
+                        <p class="text-gray-600">Track your journey through discrete mathematics</p>
+                    </div>
+
+                    <!-- Progress Overview Cards -->
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <!-- Overall Progress -->
+                        <div class="progress-dashboard card p-6 relative">
+                            <div class="relative z-10">
+                                <h3 class="text-white font-semibold mb-4">Overall Progress</h3>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="progress-level" id="overallProgressPercent">0%</div>
+                                        <p class="text-blue-100 text-sm">Mastery Level</p>
+                                    </div>
+                                    <div class="relative w-16 h-16">
+                                        <svg class="progress-ring w-16 h-16" width="64" height="64">
+                                            <circle class="text-white opacity-20" stroke-width="6" stroke="currentColor"
+                                                fill="transparent" r="24" cx="32" cy="32" />
+                                            <circle class="progress-ring-circle text-white" stroke-width="6"
+                                                stroke-dasharray="150.8" stroke-dashoffset="150.8"
+                                                stroke-linecap="round" stroke="currentColor" fill="transparent" r="24"
+                                                cx="32" cy="32" id="overallProgressRing" />
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-white text-sm font-bold"
+                                                id="completedTopicsCount">0/8</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practice Score -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Practice Score</h3>
+                                <div class="progress-badge px-3 py-1 rounded-full text-xs font-medium">
+                                    Total
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-purple-600 mb-2" id="totalPracticeScore">0</div>
+                            <p class="text-gray-600 text-sm">Points earned</p>
+                        </div>
+
+                        <!-- Study Streak -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Study Streak</h3>
+                                <div
+                                    class="progress-badge px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
+                                    Active
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-orange-600 mb-2" id="currentStreak">0</div>
+                            <p class="text-gray-600 text-sm">Consecutive days</p>
+                        </div>
+
+                        <!-- Accuracy Rate -->
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-semibold text-gray-900">Accuracy</h3>
+                                <div class="progress-badge px-3 py-1 rounded-full text-xs font-medium"
+                                    id="accuracyBadge">
+                                    -
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-green-600 mb-2" id="accuracyRate">0%</div>
+                            <p class="text-gray-600 text-sm">Practice problems</p>
+                        </div>
+                    </div>
+
+                    <!-- Learning Journey -->
+                    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                        <!-- Topics Progress -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Topics Progress</h3>
+                            <div class="space-y-4" id="topicsProgressList">
+                                <!-- Topics progress will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Learning Statistics -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Learning Statistics</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Topics Started</span>
+                                        <span class="font-semibold" id="topicsStarted">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" id="topicsStartedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Topics Completed</span>
+                                        <span class="font-semibold" id="topicsCompleted">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" id="topicsCompletedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Practice Problems Solved</span>
+                                        <span class="font-semibold" id="problemsSolved">0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" id="problemsSolvedBar"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700">Learning Time</span>
+                                        <span class="font-semibold" id="learningTime">0h</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-orange-500 h-2 rounded-full" id="learningTimeBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements & Milestones -->
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Achievements -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Achievements</h3>
+                            <div class="space-y-4" id="achievementsList">
+                                <!-- Achievements will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Learning Milestones -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-6">Learning Milestones</h3>
+                            <div class="space-y-4" id="milestonesList">
+                                <!-- Milestones will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Actions -->
+                    <div class="mt-8 flex justify-center">
+                        <button onclick="exportProgressReport()"
+                            class="primary-btn text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            <span>Export Progress Report</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Profile Content -->
             <div id="profileContent" class="hidden p-6">
@@ -630,6 +808,104 @@
                 </button>
             </form>
             <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+            <form id="signUpForm" onsubmit="handleSignUp(event); return false;" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" id="firstName" placeholder="First Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="text" id="lastName" placeholder="Last Name" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                </div>
+                <div>
+                    <input type="text" id="username" placeholder="Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <input type="email" id="signUpEmail" placeholder="Email address" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signUpPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signUpPassword', 'signUpPasswordToggle')"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signUpPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Create Account
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Already have an account?
+                    <button onclick="switchToSignIn()" class="text-purple-600 hover:text-purple-800 font-medium">Sign
+                        In</button>
+                </p>
+            </div>
+            <button onclick="closeSignUp()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50">
+        <div class="modal-content rounded-2xl p-8 max-w-md w-full mx-4 fade-in">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Welcome Back</h2>
+            <form onsubmit="handleSignIn(event)" class="space-y-4">
+                <div>
+                    <input type="text" id="signInEmailUsername" placeholder="Email or Username" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div class="relative">
+                    <input type="password" id="signInPassword" placeholder="Password" required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <button type="button" onclick="togglePasswordVisibility('signInPassword', 'signInPasswordToggle')"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                        <svg id="signInPasswordToggle" class="w-5 h-5 transition-transform duration-200" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Sign In
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-gray-600 text-sm">Don't have an account?
+                    <button onclick="switchToSignUp()" class="text-purple-600 hover:text-purple-800 font-medium">Sign
+                        Up</button>
+                </p>
+            </div>
+            <button onclick="closeSignIn()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -1039,6 +1315,36 @@
                 this.loadFromStorage();
             }
 
+            // streak
+            initializeStreak() {
+                if (!this.currentUser) return;
+
+                const today = new Date().toDateString();
+                const lastLogin = this.currentUser.lastLogin ? new Date(this.currentUser.lastLogin).toDateString() : null;
+
+                // Initialize streak if it doesn't exist
+                if (this.currentUser.streak === undefined) {
+                    this.currentUser.streak = 0;
+                }
+
+                // If last login was yesterday, increment streak
+                if (lastLogin) {
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+
+                    if (lastLogin === yesterday.toDateString()) {
+                        this.currentUser.streak += 1;
+                    } else if (lastLogin !== today) {
+                        // Reset streak if missed a day
+                        this.currentUser.streak = 0;
+                    }
+                }
+
+                // Update last login
+                this.currentUser.lastLogin = new Date().toISOString();
+                this.saveToStorage();
+            }
+
             // Persist data to localStorage using simple JSON serialization
             saveToStorage() {
                 try {
@@ -1096,7 +1402,8 @@
                     score: 0,
                     completedTopics: 0,
                     streak: 0,
-                    joinDate: new Date().toISOString()
+                    joinDate: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
                 };
                 this.users.set(userData.email, this.currentUser);
 
@@ -1127,22 +1434,27 @@
                 this.saveToStorage(); // Persist activities
             }
 
-            // Update topic completion
+            // In DataStore class, replace the completeTopicProblem method with this:
             completeTopicProblem(topicId, score) {
                 const topic = this.topics.find(t => t.id === topicId);
                 if (topic && this.currentUser) {
+                    // Update score - make sure it accumulates properly
+                    this.currentUser.score = (this.currentUser.score || 0) + score;
+
+                    // Mark topic as completed if not already
                     if (!topic.completed) {
                         topic.completed = true;
-                        this.currentUser.completedTopics++;
-                        this.addActivity({
-                            type: 'topic_completed',
-                            message: `Completed ${topic.name}`,
-                            score: score
-                        });
+                        this.currentUser.completedTopics = (this.currentUser.completedTopics || 0) + 1;
                     }
-                    this.currentUser.score += score;
+
+                    this.addActivity({
+                        type: 'topic_completed',
+                        message: `Completed ${topic.name}`,
+                        score: score
+                    });
+
                     this.updateUI();
-                    this.saveToStorage(); // Persist after update
+                    this.saveToStorage();
                 }
             }
 
@@ -1178,14 +1490,15 @@
             updateUI() {
                 if (!this.currentUser) return;
 
-                document.getElementById('userName').textContent = this.currentUser.name;
-                document.getElementById('userInitial').textContent = this.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('userScore').textContent = `Score: ${this.currentUser.score}`;
-                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics}/8`;
-                document.getElementById('practiceScore').textContent = this.currentUser.score;
-                document.getElementById('studyStreak').textContent = `${this.currentUser.streak} days`;
+                const userName = this.currentUser.name || 'User';
+                document.getElementById('userName').textContent = userName;
+                document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
+                document.getElementById('userScore').textContent = `Score: ${this.currentUser.score || 0}`;
+                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics || 0}/8`;
+                document.getElementById('practiceScore').textContent = this.currentUser.score || 0;
+                document.getElementById('studyStreak').textContent = `${this.currentUser.streak || 0} days`;
 
-                const progress = (this.currentUser.completedTopics / 8) * 100;
+                const progress = ((this.currentUser.completedTopics || 0) / 8) * 100;
                 document.getElementById('topicProgress').style.width = `${progress}%`;
                 document.getElementById('userProgress').textContent = `${Math.round(progress)}% Complete`;
             }
@@ -1226,7 +1539,8 @@
             topics: { title: 'Learning Topics', subtitle: 'Explore discrete mathematics concepts' },
             formulas: { title: 'Formula Reference', subtitle: 'Quick reference for important formulas' },
             practice: { title: 'Practice Problems', subtitle: 'Test your understanding with problems' },
-            profile: { title: 'Profile Settings', subtitle: 'Manage your account preferences' }
+            profile: { title: 'Profile Settings', subtitle: 'Manage your account preferences' },
+            progress: { title: 'Learning Progress', subtitle: 'Track your learning journey and achievements' }
         };
 
         // Authentication functions
@@ -1238,6 +1552,405 @@
         function closeLogin() {
             document.getElementById('loginModal').classList.add('hidden');
             document.getElementById('loginModal').classList.remove('flex');
+        }
+
+        // New authentication functions for Sign Up and Sign In
+        function showSignUp() {
+            const modal = document.getElementById('signUpModal');
+            console.log('signUpModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signUpModal element not found');
+            }
+        }
+
+        function closeSignUp() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('signUpModal').classList.remove('flex');
+        }
+
+        function showSignIn() {
+            const modal = document.getElementById('signInModal');
+            console.log('signInModal element:', modal);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal classes after update:', modal.className);
+            } else {
+                console.error('signInModal element not found');
+            }
+        }
+
+        function closeSignIn() {
+            document.getElementById('signInModal').classList.add('hidden');
+            document.getElementById('signInModal').classList.remove('flex');
+        }
+
+        function switchToSignIn() {
+            closeSignUp();
+            showSignIn();
+        }
+
+        function switchToSignUp() {
+            closeSignIn();
+            showSignUp();
+        }
+
+        // Local Storage Authentication Functions
+        function saveUserToStorage(userData) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+
+                // Check if user already exists
+                const existingIndex = users.findIndex(user =>
+                    user.email === userData.email || user.username === userData.username
+                );
+
+                if (existingIndex !== -1) {
+                    // Update existing user
+                    users[existingIndex] = userData;
+                } else {
+                    // Add new user
+                    users.push(userData);
+                }
+            } catch (error) {
+                console.error('Error parsing users data:', error);
+                users = [userData];
+            }
+            localStorage.setItem('discmath_users', JSON.stringify(users));
+        }
+
+        function getUserFromStorage(emailOrUsername, password) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data:', error);
+                users = [];
+            }
+
+            return users.find(user =>
+                (user.email === emailOrUsername || user.username === emailOrUsername) &&
+                user.password === password
+            );
+        }
+
+        function setCurrentUser(userData) {
+            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
+        }
+
+        function getCurrentUser() {
+            try {
+                return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
+            } catch (error) {
+                console.error('Error parsing current user:', error);
+                return null;
+            }
+        }
+        function getUserFromStorage(emailOrUsername, password) {
+            const usersData = localStorage.getItem('discmath_users') || '[]';
+            let users;
+            try {
+                users = JSON.parse(usersData);
+                // Ensure users is an array
+                if (!Array.isArray(users)) {
+                    users = [];
+                }
+            } catch (error) {
+                console.error('Error parsing users data in getUserFromStorage:', error);
+                users = [];
+            }
+            return users.find(user =>
+                (user.email === emailOrUsername || user.username === emailOrUsername) &&
+                user.password === password
+            );
+        }
+
+        function setCurrentUser(userData) {
+            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
+        }
+
+        function handleSignUp(event) {
+            console.log('handleSignUp called - START');
+
+            if (!event) {
+                console.error('Event object is null or undefined');
+                return false;
+            }
+
+            console.log('Event object:', event);
+            console.log('Event type:', event.type);
+            console.log('Event target:', event.target);
+
+            event.preventDefault();
+            console.log('preventDefault called');
+
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const username = document.getElementById('username');
+            const email = document.getElementById('signUpEmail');
+            const password = document.getElementById('signUpPassword');
+
+            console.log('Form elements found:', {
+                firstName: firstName ? firstName.value : 'NOT FOUND',
+                lastName: lastName ? lastName.value : 'NOT FOUND',
+                username: username ? username.value : 'NOT FOUND',
+                email: email ? email.value : 'NOT FOUND',
+                password: password ? password.value : 'NOT FOUND'
+            });
+
+            if (!firstName || !lastName || !username || !email || !password) {
+                console.error('One or more form elements not found!');
+                return false;
+            }
+
+            const firstNameVal = firstName.value.trim();
+            const lastNameVal = lastName.value.trim();
+            const usernameVal = username.value.trim();
+            const emailVal = email.value.trim();
+            const passwordVal = password.value.trim();
+
+            console.log('Form values:', { firstNameVal, lastNameVal, usernameVal, emailVal, passwordVal });
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!firstNameVal || firstNameVal.length < 2) {
+                firstName.classList.add('border-red-500');
+                showMessage('Please enter a valid first name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!lastNameVal || lastNameVal.length < 2) {
+                lastName.classList.add('border-red-500');
+                showMessage('Please enter a valid last name (at least 2 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!usernameVal || usernameVal.length < 3) {
+                username.classList.add('border-red-500');
+                showMessage('Please enter a valid username (at least 3 characters)', 'error');
+                hasErrors = true;
+            }
+
+            if (!emailVal || !isValidEmail(emailVal)) {
+                email.classList.add('border-red-500');
+                showMessage('Please enter a valid email address', 'error');
+                hasErrors = true;
+            }
+
+            if (!passwordVal || passwordVal.length < 6) {
+                password.classList.add('border-red-500');
+                showMessage('Password must be at least 6 characters long', 'error');
+                hasErrors = true;
+            }
+
+            console.log('Validation errors:', hasErrors);
+
+            // Check if user already exists
+            const existingUsersData = localStorage.getItem('discmath_users') || '[]';
+            let existingUsers;
+            try {
+                existingUsers = JSON.parse(existingUsersData);
+                // Ensure existingUsers is an array
+                if (!Array.isArray(existingUsers)) {
+                    existingUsers = [];
+                }
+            } catch (error) {
+                console.error('Error parsing existing users data:', error);
+                existingUsers = [];
+            }
+            const userExists = existingUsers.find(user => user.email === emailVal || user.username === usernameVal);
+
+            if (userExists) {
+                if (userExists.email === emailVal) {
+                    email.classList.add('border-red-500');
+                    showMessage('An account with this email already exists', 'error');
+                } else {
+                    username.classList.add('border-red-500');
+                    showMessage('This username is already taken', 'error');
+                }
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                console.log('Stopping due to validation errors');
+                return false;
+            }
+
+            console.log('Creating user data...');
+
+            // Create user data
+            const userData = {
+                firstName: firstNameVal,
+                lastName: lastNameVal,
+                username: usernameVal,
+                email: emailVal,
+                password: passwordVal,
+                createdAt: new Date().toISOString(),
+                streak: 0,
+                completedTopics: 0,
+                totalScore: 0
+            };
+
+            console.log('User data created:', userData);
+
+            // Save to localStorage
+            saveUserToStorage(userData);
+            setCurrentUser(userData);
+
+            // Initialize user in dataStore
+            dataStore.currentUser = userData;
+            dataStore.users.set(emailVal, userData);
+
+            dataStore.initializeStreak();
+
+            // Initialize activities for new user
+            if (!dataStore.userActivities.has(emailVal)) {
+                dataStore.userActivities.set(emailVal, []);
+            }
+
+            // Save to dataStore storage
+            dataStore.saveToStorage();
+
+            console.log('User saved, showing success message');
+            showMessage('Account created successfully! Welcome to DiscMath Companion!', 'success');
+            closeSignUp();
+
+            // Switch to dashboard
+            setTimeout(() => {
+                console.log('Switching to dashboard...');
+                switchToDashboard();
+            }, 1500);
+
+            console.log('handleSignUp completed successfully');
+            return false;
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+
+            const emailOrUsername = document.getElementById('signInEmailUsername').value.trim();
+            const password = document.getElementById('signInPassword').value.trim();
+
+            // Clear previous error states
+            const inputs = event.target.querySelectorAll('input');
+            inputs.forEach(input => input.classList.remove('border-red-500'));
+
+            // Validation
+            let hasErrors = false;
+
+            if (!emailOrUsername) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                showMessage('Please enter your email or username', 'error');
+                hasErrors = true;
+            }
+
+            if (!password) {
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Please enter your password', 'error');
+                hasErrors = true;
+            }
+
+            if (hasErrors) return;
+
+            // Check credentials using both methods
+            let user = null;
+
+            // Method 1: Check in localStorage users array
+            user = getUserFromStorage(emailOrUsername, password);
+
+            // Method 2: Check in dataStore Map (fallback)
+            if (!user) {
+                // Check by email
+                if (dataStore.users.has(emailOrUsername)) {
+                    const potentialUser = dataStore.users.get(emailOrUsername);
+                    if (potentialUser.password === password) {
+                        user = potentialUser;
+                    }
+                }
+                // Check by username
+                if (!user) {
+                    for (let [email, userData] of dataStore.users) {
+                        if (userData.username === emailOrUsername && userData.password === password) {
+                            user = userData;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!user) {
+                document.getElementById('signInEmailUsername').classList.add('border-red-500');
+                document.getElementById('signInPassword').classList.add('border-red-500');
+                showMessage('Invalid email/username or password', 'error');
+                return;
+            }
+
+            // Set current user in both systems
+            setCurrentUser(user);
+            dataStore.currentUser = user;
+
+            // Ensure user exists in dataStore users Map
+            if (!dataStore.users.has(user.email)) {
+                dataStore.users.set(user.email, user);
+            }
+
+            dataStore.initializeStreak();
+
+            // Initialize activities if needed
+            if (!dataStore.userActivities.has(user.email)) {
+                dataStore.userActivities.set(user.email, []);
+            }
+
+            showMessage(`Welcome back, ${user.firstName || user.name}!`, 'success');
+            closeSignIn();
+
+            // Switch to dashboard
+            setTimeout(() => {
+                switchToDashboard();
+            }, 1500);
+        }
+
+        function switchToDashboard() {
+            // Hide landing page and show dashboard using classes
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.remove('hidden');
+
+            // Reset any display styles
+            document.getElementById('landingPage').style.display = '';
+            document.getElementById('dashboardPage').style.display = '';
+
+            // Ensure UI is properly updated
+            if (dataStore.currentUser) {
+                dataStore.updateUI();
+                dataStore.updateRecentActivity();
+            }
+
+            // Load necessary content
+            loadTopics();
+            loadFormulas();
+            loadPracticeTopics();
         }
 
         function handleLogin(event) {
@@ -1329,10 +2042,22 @@
         }
 
         function logout() {
+            // Clear current user from dataStore
             dataStore.currentUser = null;
-            localStorage.removeItem('discmath_currentUserEmail'); // Clear current user
+
+            // Clear current user from localStorage
+            localStorage.removeItem('discmath_current_user');
+            localStorage.removeItem('discmath_currentUserEmail');
+
+            // Hide dashboard and show landing page using the same method
             document.getElementById('dashboardPage').classList.add('hidden');
             document.getElementById('landingPage').classList.remove('hidden');
+
+            // Reset any display styles that might be overriding the classes
+            document.getElementById('dashboardPage').style.display = '';
+            document.getElementById('landingPage').style.display = '';
+
+            showMessage('Logged out successfully!', 'success');
         }
 
         function showDashboard() {
@@ -1374,16 +2099,43 @@
 
             currentPage = pageName;
 
-            // Load profile data if on profile page
-            if (pageName === 'profile' && dataStore.currentUser) {
-                const joinDate = new Date(dataStore.currentUser.joinDate).toISOString().split('T')[0];
-                document.getElementById('profileDisplayName').textContent = dataStore.currentUser.name;
-                document.getElementById('profileDisplayEmail').textContent = dataStore.currentUser.email;
-                document.getElementById('profileJoinDate').textContent = joinDate;
-                document.getElementById('profileInitial').textContent = dataStore.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('profileName').value = dataStore.currentUser.name;
-                document.getElementById('profileEmail').value = dataStore.currentUser.email;
+            // Load content based on the page
+            if (pageName === 'topics') {
+                loadTopics();
+            } else if (pageName === 'formulas') {
+                loadFormulas();
+            } else if (pageName === 'practice') {
+                loadPracticeTopics();
+            } else if (pageName === 'profile' && dataStore.currentUser) {
+                loadProfileData();
             }
+        }
+
+        // Load profile data
+        function loadProfileData() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            
+            // Format join date
+            const joinDate = user.createdAt ? 
+                new Date(user.createdAt).toISOString().split('T')[0] : 
+                new Date().toISOString().split('T')[0];
+
+            // Get display name (use firstName + lastName if available, otherwise fallback to name)
+            const displayName = user.firstName && user.lastName ? 
+                `${user.firstName} ${user.lastName}` : 
+                user.name || 'User';
+
+            // Update profile display elements
+            document.getElementById('profileDisplayName').textContent = displayName;
+            document.getElementById('profileDisplayEmail').textContent = user.email;
+            document.getElementById('profileJoinDate').textContent = joinDate;
+            document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
+            
+            // Update form fields
+            document.getElementById('profileName').value = displayName;
+            document.getElementById('profileEmail').value = user.email;
         }
 
         // Load topics
@@ -1444,15 +2196,42 @@
             container.innerHTML = html;
         }
 
-        // Load practice topics
         function loadPracticeTopics() {
             const container = document.getElementById('practiceTopics');
-            container.innerHTML = dataStore.topics.filter(topic => topic.problems.length > 0).map(topic => `
-                <button onclick="startPractice(${topic.id})" class="card p-4 text-left hover:scale-105 transition-all">
-                    <h4 class="font-semibold text-gray-900 mb-2">${topic.name}</h4>
-                    <p class="text-gray-600 text-sm">${topic.problems.length} problems available</p>
-                </button>
-            `).join('');
+            if (!container) return;
+
+            container.innerHTML = dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).map(topic => `
+        <button onclick="startPractice(${topic.id})" class="card p-6 text-left hover:scale-105 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-semibold text-gray-900 text-lg">${topic.name}</h4>
+                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">
+                    ${topic.problems.length} problems
+                </span>
+            </div>
+            <p class="text-gray-600 mb-4">${topic.description}</p>
+            <div class="flex items-center text-sm text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>~${Math.ceil(topic.problems.length * 2)} min</span>
+            </div>
+        </button>
+    `).join('');
+
+            // If no practice topics available, show message
+            if (dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).length === 0) {
+                container.innerHTML = `
+            <div class="col-span-2 text-center py-12">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">No Practice Problems Available</h3>
+                <p class="text-gray-600">Practice problems for topics are coming soon!</p>
+            </div>
+        `;
+            }
         }
 
         // Learning function
@@ -1573,54 +2352,101 @@
         }
 
         function startPractice(topicId) {
+            console.log('Starting practice for topic:', topicId);
+
             const topic = dataStore.topics.find(t => t.id === topicId);
-            if (!topic || topic.problems.length === 0) {
+            if (!topic) {
+                console.error('Topic not found:', topicId);
+                showMessage('Topic not found!', 'error');
+                return;
+            }
+
+            if (!topic.problems || topic.problems.length === 0) {
+                console.log('No problems for topic:', topic.name);
                 showMessage('No practice problems available for this topic yet.', 'info');
                 return;
             }
+
+            console.log('Found topic:', topic.name, 'with problems:', topic.problems.length);
 
             currentPractice = {
                 topicId: topicId,
                 currentQuestion: 0,
                 score: 0,
-                answers: []
+                answers: [],
+                topicName: topic.name
             };
 
             showQuestion();
         }
 
         function showQuestion() {
+            if (!currentPractice) {
+                console.error('No current practice session');
+                return;
+            }
+
             const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            if (!topic || !topic.problems || topic.problems.length === 0) {
+                console.error('Topic or problems not found for topic ID:', currentPractice.topicId);
+                showMessage('Practice problems not available for this topic.', 'error');
+                return;
+            }
+
             const question = topic.problems[currentPractice.currentQuestion];
+            if (!question) {
+                console.error('Question not found at index:', currentPractice.currentQuestion);
+                return;
+            }
+
+            console.log('Showing question for topic:', topic.name, 'Question:', currentPractice.currentQuestion + 1);
 
             document.getElementById('practiceArea').innerHTML = `
-                <div class="max-w-2xl mx-auto">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
-                        <span class="text-gray-600">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
-                        <div class="space-y-3">
-                            ${question.options.map((option, index) => `
-                                <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all answer-option">
-                                    <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
-                                </button>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-between">
-                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium">
-                            Back to Topics
-                        </button>
-                        <div class="text-gray-600">
-                            Score: ${currentPractice.score}/${currentPractice.currentQuestion * 10}
-                        </div>
-                    </div>
+        <div class="max-w-2xl mx-auto">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">${topic.name} Practice</h2>
+                    <p class="text-gray-600">${topic.description}</p>
                 </div>
-            `;
+                <span class="text-gray-600 bg-gray-100 px-3 py-1 rounded-full">Question ${currentPractice.currentQuestion + 1} of ${topic.problems.length}</span>
+            </div>
+            
+            <div class="card p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">${question.question}</h3>
+                <div class="space-y-3" id="optionsContainer">
+                    ${question.options.map((option, index) => `
+                        <button onclick="selectAnswer(${index})" class="w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 answer-option">
+                            <span class="font-medium text-purple-600">${String.fromCharCode(65 + index)}.</span> 
+                            <span class="ml-2">${option}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <div class="text-gray-600 font-medium">
+                    Score: <span class="text-purple-600">${currentPractice.score}</span> points
+                </div>
+                
+                <button onclick="nextQuestion()" id="nextButton" class="primary-btn text-white px-6 py-2 rounded-lg font-medium hidden">
+                    ${currentPractice.currentQuestion === topic.problems.length - 1 ? 'Finish Practice' : 'Next Question'}
+                </button>
+            </div>
+        </div>
+    `;
+
+            console.log('Question displayed successfully');
+        }
+
+        function nextQuestion() {
+            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+
+            currentPractice.currentQuestion++;
+            if (currentPractice.currentQuestion < topic.problems.length) {
+                showQuestion();
+            } else {
+                finishPractice();
+            }
         }
 
         function selectAnswer(selectedIndex) {
@@ -1637,7 +2463,6 @@
                 if (index === question.correct && !isCorrect) {
                     option.classList.add('correct');
                 }
-
                 option.style.pointerEvents = 'none';
             });
 
@@ -1648,61 +2473,103 @@
 
             // Show explanation only if wrong
             if (!isCorrect) {
-                const optionsContainer = document.querySelector('.mb-8 .space-y-3');
+                const optionsContainer = document.getElementById('optionsContainer');
                 const explanationDiv = document.createElement('div');
                 explanationDiv.className = 'mt-4 p-4 bg-red-50 border-l-4 border-red-400 rounded-r-lg';
                 explanationDiv.innerHTML = `
-                    <h4 class="font-semibold text-red-800 mb-2">Why is this wrong?</h4>
-                    <p class="text-red-700 text-sm">${question.explanation}</p>
-                `;
+            <h4 class="font-semibold text-red-800 mb-2">Why is this wrong?</h4>
+            <p class="text-red-700 text-sm">${question.explanation}</p>
+        `;
                 optionsContainer.insertAdjacentElement('afterend', explanationDiv);
             }
 
-            // Show next question or finish
-            setTimeout(() => {
-                currentPractice.currentQuestion++;
-                if (currentPractice.currentQuestion < topic.problems.length) {
-                    showQuestion();
-                } else {
-                    finishPractice();
-                }
-            }, 3000); // Increased timeout to 3s to allow reading the explanation
+            // Show next button instead of auto-advancing
+            const nextButton = document.getElementById('nextButton');
+            if (nextButton) {
+                nextButton.classList.remove('hidden');
+            }
+
+            // Update score display
+            const scoreElement = document.querySelector('.flex.justify-between.items-center .text-gray-600');
+            if (scoreElement) {
+                scoreElement.textContent = `Score: ${currentPractice.score}/${(currentPractice.currentQuestion + 1) * 10}`;
+            }
         }
 
         function finishPractice() {
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-            const totalQuestions = topic.problems.length;
-            const correctAnswers = currentPractice.answers.filter((answer, index) =>
-                answer === topic.problems[index].correct
-            ).length;
+    const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+    const totalQuestions = topic.problems.length;
+    const correctAnswers = currentPractice.answers.filter((answer, index) =>
+        answer === topic.problems[index].correct
+    ).length;
 
-            dataStore.completeTopicProblem(currentPractice.topicId, currentPractice.score);
+    // Calculate final score (10 points per correct answer)
+    const finalScore = correctAnswers * 10;
 
-            document.getElementById('practiceArea').innerHTML = `
-                <div class="text-center max-w-md mx-auto">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
-                    <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                        <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
-                        <p class="text-gray-600">Correct Answers</p>
-                        <div class="text-xl font-semibold text-green-600 mt-2">+${currentPractice.score} Points</div>
-                    </div>
-                    <div class="space-y-3">
-                        <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
-                            Try Again
-                        </button>
-                        <button onclick="loadPracticeTopics(); document.getElementById('practiceArea').innerHTML = '<div class=\\'text-center\\'><h2 class=\\'text-2xl font-bold text-gray-900 mb-4\\'>Practice Problems</h2><p class=\\'text-gray-600 mb-6\\'>Select a topic to start practicing</p><div class=\\'grid md:grid-cols-2 gap-4\\' id=\\'practiceTopics\\'></div></div>'; loadPracticeTopics();" class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-medium">
-                            Back to Topics
-                        </button>
-                    </div>
-                </div>
-            `;
+    // Update user progress and score
+    dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
 
-            currentPractice = null;
+    document.getElementById('practiceArea').innerHTML = `
+        <div class="text-center max-w-md mx-auto">
+            <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${correctAnswers === totalQuestions ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'}"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Practice Complete!</h2>
+            <p class="text-gray-600 mb-6">You've completed <span class="font-semibold">${topic.name}</span> practice</p>
+            <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                <div class="text-3xl font-bold text-purple-600 mb-2">${correctAnswers}/${totalQuestions}</div>
+                <p class="text-gray-600">Correct Answers</p>
+                <div class="text-xl font-semibold text-green-600 mt-2">+${finalScore} Points</div>
+                <div class="text-sm text-gray-500 mt-2">Accuracy: ${Math.round((correctAnswers / totalQuestions) * 100)}%</div>
+            </div>
+            <div class="space-y-3">
+                <button onclick="startPractice(${currentPractice.topicId})" class="w-full primary-btn text-white py-3 rounded-lg font-medium">
+                    Try Again
+                </button>
+                <button onclick="showPage('topics')" class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 rounded-lg font-medium">
+                    Back to All Topics
+                </button>
+            </div>
+        </div>
+    `;
+
+    currentPractice = null;
+}
+
+        function manualBackToTopics() {
+            console.log('Manual back to topics page');
+
+            // Hide all content sections
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            contents.forEach(content => {
+                const element = document.getElementById(content);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            });
+
+            // Show TOPICS content (not practice)
+            const topicsContent = document.getElementById('topicsContent');
+            if (topicsContent) {
+                topicsContent.classList.remove('hidden');
+            }
+
+            // Load the topics (this will show the learning topics)
+            loadTopics();
+
+            // Update page info to show Topics page
+            document.getElementById('pageTitle').textContent = 'Learning Topics';
+            document.getElementById('pageSubtitle').textContent = 'Explore discrete mathematics concepts';
+
+            // Update sidebar to highlight Topics
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[onclick="showPage(\'topics\')"]').classList.add('active');
+
+            console.log('Manual back to topics page completed');
         }
 
         // Profile functions (now uses the updated method in DataStore)
@@ -1776,14 +2643,413 @@
             }
         });
 
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(iconId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Change to eye-off icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                `;
+                eyeIcon.classList.add('rotate-12');
+            } else {
+                passwordInput.type = 'password';
+                // Change back to eye icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                `;
+                eyeIcon.classList.remove('rotate-12');
+            }
+        }
+
+
+        // Progress tracking functions
+        function updateProgressDashboard() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            const totalTopics = dataStore.topics.length;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const startedTopics = dataStore.topics.filter(topic => topic.viewed).length;
+            const progressPercent = Math.round((completedTopics / totalTopics) * 100);
+
+            // Update overall progress
+            document.getElementById('overallProgressPercent').textContent = `${progressPercent}%`;
+            document.getElementById('completedTopicsCount').textContent = `${completedTopics}/${totalTopics}`;
+
+            // Update progress ring
+            const circumference = 2 * Math.PI * 24;
+            const offset = circumference - (progressPercent / 100) * circumference;
+            const progressRing = document.getElementById('overallProgressRing');
+            if (progressRing) {
+                progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+                progressRing.style.strokeDashoffset = offset;
+            }
+
+            // Update other metrics
+            document.getElementById('totalPracticeScore').textContent = user.score || 0;
+            document.getElementById('currentStreak').textContent = user.streak || 0;
+
+            // Calculate accuracy
+            const accuracy = calculateAccuracy();
+            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+
+            // Update accuracy badge
+            const accuracyBadge = document.getElementById('accuracyBadge');
+            if (accuracy >= 80) {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-600';
+                accuracyBadge.textContent = 'Excellent';
+            } else if (accuracy >= 60) {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600';
+                accuracyBadge.textContent = 'Good';
+            } else {
+                accuracyBadge.className = 'progress-badge px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-600';
+                accuracyBadge.textContent = 'Needs Work';
+            }
+
+            // Update learning statistics
+            updateLearningStatistics(startedTopics, completedTopics, totalTopics);
+
+            // Update topics progress
+            updateTopicsProgress();
+
+            // Update achievements
+            updateAchievements();
+
+            // Update milestones
+            updateMilestones();
+        }
+
+        function updateLearningStatistics(started, completed, total) {
+            document.getElementById('topicsStarted').textContent = `${started}/${total}`;
+            document.getElementById('topicsCompleted').textContent = `${completed}/${total}`;
+
+            // Calculate problems solved (estimate based on score)
+            const problemsSolved = Math.floor((dataStore.currentUser.score || 0) / 10);
+            document.getElementById('problemsSolved').textContent = problemsSolved;
+
+            // Estimate learning time (1 hour per topic started + 30 min per completed topic)
+            const learningHours = started * 1 + completed * 0.5;
+            document.getElementById('learningTime').textContent = `${learningHours.toFixed(1)}h`;
+
+            // Update progress bars
+            document.getElementById('topicsStartedBar').style.width = `${(started / total) * 100}%`;
+            document.getElementById('topicsCompletedBar').style.width = `${(completed / total) * 100}%`;
+            document.getElementById('problemsSolvedBar').style.width = `${Math.min(100, (problemsSolved / 50) * 100)}%`;
+            document.getElementById('learningTimeBar').style.width = `${Math.min(100, (learningHours / 20) * 100)}%`;
+        }
+
+        function calculateAccuracy() {
+            const user = dataStore.currentUser;
+            if (!user || user.score === 0) return 0;
+
+            // Estimate accuracy based on score and completed topics
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const maxPossibleScore = completedTopics * 50;
+
+            if (maxPossibleScore === 0) return 0;
+
+            return Math.min(100, Math.round((user.score / maxPossibleScore) * 100));
+        }
+
+        function updateTopicsProgress() {
+            const container = document.getElementById('topicsProgressList');
+            if (!container) return;
+
+            container.innerHTML = dataStore.topics.map(topic => {
+                const statusClass = topic.completed ? 'completed' :
+                    topic.viewed ? 'in-progress' : 'not-started';
+                const statusText = topic.completed ? 'Completed' :
+                    topic.viewed ? 'In Progress' : 'Not Started';
+                const statusColor = topic.completed ? 'text-green-600' :
+                    topic.viewed ? 'text-yellow-600' : 'text-gray-500';
+
+                return `
+            <div class="progress-topic-item ${statusClass} p-4 rounded-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <span class="text-gray-600 font-semibold">${topic.id}</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">${topic.name}</h4>
+                            <p class="text-gray-600 text-sm">${topic.description}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="${statusColor} font-medium">${statusText}</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2">
+                            <div class="bg-${topic.completed ? 'green' : topic.viewed ? 'yellow' : 'gray'}-500 h-2 rounded-full transition-all duration-500" 
+                                  style="width: ${topic.completed ? '100' : topic.viewed ? '50' : '0'}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+            }).join('');
+        }
+
+        function updateAchievements() {
+            const container = document.getElementById('achievementsList');
+            if (!container) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+
+            const achievements = [
+                {
+                    id: 1,
+                    name: 'First Steps',
+                    description: 'Complete your first topic',
+                    icon: '🚀',
+                    unlocked: completedTopics >= 1,
+                    progress: completedTopics >= 1 ? 100 : 0
+                },
+                {
+                    id: 2,
+                    name: 'Halfway There',
+                    description: 'Complete 50% of topics',
+                    icon: '🎯',
+                    unlocked: completedTopics >= totalTopics / 2,
+                    progress: Math.min(100, (completedTopics / (totalTopics / 2)) * 100)
+                },
+                {
+                    id: 3,
+                    name: 'Practice Master',
+                    description: 'Score 1000+ points',
+                    icon: '🏆',
+                    unlocked: (user.score || 0) >= 1000,
+                    progress: Math.min(100, ((user.score || 0) / 1000) * 100)
+                },
+                {
+                    id: 4,
+                    name: 'Consistent Learner',
+                    description: '7-day study streak',
+                    icon: '🔥',
+                    unlocked: (user.streak || 0) >= 7,
+                    progress: Math.min(100, ((user.streak || 0) / 7) * 100)
+                },
+                {
+                    id: 5,
+                    name: 'Discrete Math Pro',
+                    description: 'Complete all topics',
+                    icon: '⭐',
+                    unlocked: completedTopics === totalTopics,
+                    progress: Math.min(100, (completedTopics / totalTopics) * 100)
+                },
+                {
+                    id: 6,
+                    name: 'Accuracy Champion',
+                    description: 'Achieve 90%+ accuracy',
+                    icon: '🎯',
+                    unlocked: calculateAccuracy() >= 90,
+                    progress: Math.min(100, calculateAccuracy())
+                }
+            ];
+
+            container.innerHTML = achievements.map(achievement => `
+        <div class="progress-achievement p-4 rounded-lg ${achievement.unlocked ? '' : 'achievement-locked'}">
+            <div class="flex items-center space-x-3 mb-3">
+                <div class="text-2xl">${achievement.icon}</div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 ${achievement.unlocked ? '' : 'text-gray-500'}">${achievement.name}</h4>
+                    <p class="text-gray-600 text-sm">${achievement.description}</p>
+                </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full transition-all duration-500" 
+                      style="width: ${achievement.progress}%"></div>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+                <span class="text-xs text-gray-500">${achievement.unlocked ? 'Unlocked' : 'Locked'}</span>
+                <span class="text-xs font-medium">${Math.round(achievement.progress)}%</span>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        function updateMilestones() {
+            const container = document.getElementById('milestonesList');
+            if (!container) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+
+            const milestones = [
+                { name: 'Start First Topic', completed: dataStore.topics.some(t => t.viewed) },
+                { name: 'Complete Set Theory', completed: dataStore.topics[0]?.completed },
+                { name: 'Complete Logic & Proofs', completed: dataStore.topics[1]?.completed },
+                { name: 'Score 500 Points', completed: (user.score || 0) >= 500 },
+                { name: '3-Day Streak', completed: (user.streak || 0) >= 3 },
+                { name: 'Complete All Topics', completed: completedTopics === totalTopics }
+            ];
+
+            container.innerHTML = milestones.map(milestone => `
+        <div class="flex items-center justify-between p-3 border-b border-gray-200 last:border-b-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full flex items-center justify-center ${milestone.completed ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400'
+                }">
+                    ${milestone.completed ? '✓' : ''}
+                </div>
+                <span class="${milestone.completed ? 'text-gray-900' : 'text-gray-500'}">${milestone.name}</span>
+            </div>
+            <span class="text-sm ${milestone.completed ? 'text-green-600' : 'text-gray-400'}">
+                ${milestone.completed ? 'Completed' : 'Pending'}
+            </span>
+        </div>
+    `).join('');
+        }
+
+        function exportProgressReport() {
+            if (!dataStore.currentUser) return;
+
+            const user = dataStore.currentUser;
+            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const totalTopics = dataStore.topics.length;
+            const progressPercent = Math.round((completedTopics / totalTopics) * 100);
+
+            const report = `
+DiscMath Companion - Progress Report
+====================================
+
+Student: ${user.name || 'User'}
+Email: ${user.email}
+Report Date: ${new Date().toLocaleDateString()}
+
+OVERALL PROGRESS
+----------------
+Completion: ${progressPercent}% (${completedTopics}/${totalTopics} topics)
+Total Score: ${user.score || 0} points
+Study Streak: ${user.streak || 0} days
+Accuracy Rate: ${calculateAccuracy()}%
+
+TOPICS PROGRESS
+---------------
+${dataStore.topics.map(topic =>
+                `${topic.completed ? '✓' : topic.viewed ? '→' : '○'} ${topic.name} - ${topic.completed ? 'Completed' : topic.viewed ? 'In Progress' : 'Not Started'}`
+            ).join('\n')}
+
+ACHIEVEMENTS
+------------
+${dataStore.topics.filter(t => t.completed).length >= 1 ? '✓ First Steps - Complete your first topic' : '○ First Steps'}
+${dataStore.topics.filter(t => t.completed).length >= totalTopics / 2 ? '✓ Halfway There - Complete 50% of topics' : '○ Halfway There'}
+${(user.score || 0) >= 1000 ? '✓ Practice Master - Score 1000+ points' : '○ Practice Master'}
+${(user.streak || 0) >= 7 ? '✓ Consistent Learner - 7-day study streak' : '○ Consistent Learner'}
+
+Keep up the great work! Continue your discrete mathematics journey.
+    `.trim();
+
+            // Create and download the report as a text file
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `discmath-progress-report-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showMessage('Progress report exported successfully!', 'success');
+        }
+
+        // Update the showPage function to handle progress page
+        function showPage(pageName) {
+            // Hide all content
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'progressContent', 'profileContent'];
+            contents.forEach(content => {
+                document.getElementById(content).classList.add('hidden');
+            });
+
+            // Also hide learning content if it exists
+            const learningContainer = document.getElementById('learningContent');
+            if (learningContainer) {
+                learningContainer.classList.add('hidden');
+            }
+
+            // Show selected content
+            document.getElementById(pageName + 'Content').classList.remove('hidden');
+
+            // Update page info
+            const info = pageInfo[pageName];
+            document.getElementById('pageTitle').textContent = info.title;
+            document.getElementById('pageSubtitle').textContent = info.subtitle;
+
+            // Update sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[onclick="showPage('${pageName}')"]`).classList.add('active');
+
+            currentPage = pageName;
+
+            // Load content based on the page
+            if (pageName === 'topics') {
+                loadTopics();
+            } else if (pageName === 'formulas') {
+                loadFormulas();
+            } else if (pageName === 'practice') {
+                loadPracticeTopics();
+            } else if (pageName === 'progress') {
+                updateProgressDashboard();
+            } else if (pageName === 'profile' && dataStore.currentUser) {
+                loadProfileData();
+            }
+        }
+
+        // Close Sign Up modal when clicking outside
+        document.getElementById('signUpModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignUp();
+            }
+        });
+
+        // Close Sign In modal when clicking outside
+        document.getElementById('signInModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSignIn();
+            }
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
             });
+
+            // Check if user is already logged in using both methods
+            let currentUser = getCurrentUser();
+
+            if (!currentUser) {
+                // Fallback: check dataStore currentUser
+                currentUser = dataStore.currentUser;
+            }
+
+            if (currentUser) {
+                // Ensure user exists in dataStore
+                if (!dataStore.users.has(currentUser.email)) {
+                    dataStore.users.set(currentUser.email, currentUser);
+                }
+                dataStore.currentUser = currentUser;
+
+                dataStore.initializeStreak();
+
+                // Initialize activities if needed
+                if (!dataStore.userActivities.has(currentUser.email)) {
+                    dataStore.userActivities.set(currentUser.email, []);
+                }
+
+                switchToDashboard();
+            }
         });
     </script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'989499e4c3a44463',t:'MTc1OTU4MDA4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
+
 </html>
