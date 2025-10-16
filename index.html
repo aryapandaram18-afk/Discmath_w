@@ -2737,7 +2737,6 @@
             document.getElementById('learningTime').textContent = `${learningHours.toFixed(1)}h`;
 
             // Update progress bars
-            document.getElementById('topicsStartedBar').style.width = `${(started / total) * 100}%`;
             document.getElementById('topicsCompletedBar').style.width = `${(completed / total) * 100}%`;
             document.getElementById('problemsSolvedBar').style.width = `${Math.min(100, (problemsSolved / 50) * 100)}%`;
             document.getElementById('learningTimeBar').style.width = `${Math.min(100, (learningHours / 20) * 100)}%`;
@@ -2882,7 +2881,6 @@
             const totalTopics = dataStore.topics.length;
 
             const milestones = [
-                { name: 'Start First Topic', completed: dataStore.topics.some(t => t.viewed) },
                 { name: 'Complete Set Theory', completed: dataStore.topics[0]?.completed },
                 { name: 'Complete Logic & Proofs', completed: dataStore.topics[1]?.completed },
                 { name: 'Score 500 Points', completed: (user.score || 0) >= 500 },
@@ -3053,3 +3051,4 @@ Keep up the great work! Continue your discrete mathematics journey.
 </body>
 
 </html>
+
