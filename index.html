@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -930,6 +931,7 @@
                         name: "Set Theory",
                         description: "Learn about sets, operations, and relationships",
                         completed: false,
+                        viewed: false,
                         formulas: ["A ∪ B", "A ∩ B", "A - B", "A'"],
                         learningContent: {
                             introduction: "Set theory is the foundation of modern mathematics. A set is a collection of distinct objects, called elements or members.",
@@ -996,6 +998,7 @@
                         name: "Logic & Proofs",
                         description: "Propositional logic, truth tables, and proof techniques",
                         completed: false,
+                        viewed: false,
                         formulas: ["P ∧ Q", "P ∨ Q", "P → Q", "¬P"],
                         learningContent: {
                             introduction: "Logic is the foundation of mathematical reasoning and computer science. It helps us determine what is true or false.",
@@ -1062,6 +1065,7 @@
                         name: "Graph Theory",
                         description: "Vertices, edges, paths, and graph algorithms",
                         completed: false,
+                        viewed: false,
                         formulas: ["V - E + F = 2", "Σdeg(v) = 2|E|"],
                         learningContent: {
                             introduction: "Graph theory studies networks of connected objects. It's essential for understanding social networks, computer networks, and many algorithms.",
@@ -1129,6 +1133,7 @@
                         name: "Combinatorics",
                         description: "Counting principles, permutations, and combinations",
                         completed: false,
+                        viewed: false,
                         formulas: ["P(n,r) = n!/(n-r)!", "C(n,r) = n!/(r!(n-r)!)"],
                         learningContent: {
                             introduction: "Combinatorics is the art of counting. It helps us determine how many ways we can arrange, select, or organize objects.",
@@ -1195,6 +1200,7 @@
                         name: "Number Theory",
                         description: "Prime numbers, divisibility, and modular arithmetic",
                         completed: false,
+                        viewed: false,
                         formulas: ["gcd(a,b)", "a ≡ b (mod n)"],
                         learningContent: {
                             introduction: "Study of integers and their properties.",
@@ -1266,6 +1272,7 @@
                         name: "Relations",
                         description: "Binary relations, equivalence, and ordering",
                         completed: false,
+                        viewed: false,
                         formulas: ["R ⊆ A × B", "R⁻¹"],
                         problems: []
                     },
@@ -1274,6 +1281,7 @@
                         name: "Functions",
                         description: "Domain, range, injective, surjective functions",
                         completed: false,
+                        viewed: false,
                         formulas: ["f: A → B", "f⁻¹"],
                         problems: []
                     },
@@ -1282,6 +1290,7 @@
                         name: "Algorithms",
                         description: "Complexity analysis and basic algorithms",
                         completed: false,
+                        viewed: false,
                         formulas: ["O(n)", "Θ(n)", "Ω(n)"],
                         problems: []
                     }
@@ -1313,6 +1322,29 @@
 
                 // Load persisted data from localStorage (simple JSON object/array storage)
                 this.loadFromStorage();
+            }
+
+            // Get user-specific topics
+            getUserTopics() {
+                if (!this.currentUser) return [];
+                const userKey = `topics_${this.currentUser.email}`;
+                const stored = localStorage.getItem(userKey);
+                
+                if (stored) {
+                    return JSON.parse(stored);
+                } else {
+                    // For new users, create a fresh copy of topics
+                    const freshTopics = JSON.parse(JSON.stringify(this.topics));
+                    this.saveUserTopics(freshTopics);
+                    return freshTopics;
+                }
+            }
+
+            // Save user-specific topics
+            saveUserTopics(topics) {
+                if (!this.currentUser) return;
+                const userKey = `topics_${this.currentUser.email}`;
+                localStorage.setItem(userKey, JSON.stringify(topics));
             }
 
             // streak
@@ -1399,13 +1431,17 @@
                 this.currentUser = {
                     name: userData.name,
                     email: userData.email,
-                    score: 0,
-                    completedTopics: 0,
-                    streak: 0,
-                    joinDate: new Date().toISOString(),
+                    score: userData.score || 0,
+                    completedTopics: userData.completedTopics || 0,
+                    streak: userData.streak || 0,
+                    joinDate: userData.joinDate || new Date().toISOString(),
                     lastLogin: new Date().toISOString()
                 };
                 this.users.set(userData.email, this.currentUser);
+
+                // Initialize topics for new user
+                const userTopics = this.getUserTopics();
+                this.saveUserTopics(userTopics);
 
                 // Initialize activities for new user
                 if (!this.userActivities.has(userData.email)) {
@@ -1414,7 +1450,7 @@
 
                 this.updateUI();
                 this.updateRecentActivity();
-                this.saveToStorage(); // Persist after setting
+                this.saveToStorage();
             }
 
             // Add activity to user's log
@@ -1431,20 +1467,19 @@
                 }
                 this.userActivities.set(this.currentUser.email, userActs);
                 this.updateRecentActivity();
-                this.saveToStorage(); // Persist activities
+                this.saveToStorage();
             }
 
-            // In DataStore class, replace the completeTopicProblem method with this:
             completeTopicProblem(topicId, score) {
-                const topic = this.topics.find(t => t.id === topicId);
+                const userTopics = this.getUserTopics();
+                const topic = userTopics.find(t => t.id === topicId);
                 if (topic && this.currentUser) {
-                    // Update score - make sure it accumulates properly
                     this.currentUser.score = (this.currentUser.score || 0) + score;
 
-                    // Mark topic as completed if not already
                     if (!topic.completed) {
                         topic.completed = true;
                         this.currentUser.completedTopics = (this.currentUser.completedTopics || 0) + 1;
+                        this.saveUserTopics(userTopics);
                     }
 
                     this.addActivity({
@@ -1455,6 +1490,15 @@
 
                     this.updateUI();
                     this.saveToStorage();
+                }
+            }
+
+            markTopicViewed(topicId) {
+                const userTopics = this.getUserTopics();
+                const topic = userTopics.find(t => t.id === topicId);
+                if (topic && !topic.viewed) {
+                    topic.viewed = true;
+                    this.saveUserTopics(userTopics);
                 }
             }
 
@@ -1483,7 +1527,7 @@
 
                 this.updateUI();
                 this.updateRecentActivity();
-                this.saveToStorage(); // Persist profile changes
+                this.saveToStorage();
             }
 
             // UI Update methods
@@ -1494,11 +1538,15 @@
                 document.getElementById('userName').textContent = userName;
                 document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
                 document.getElementById('userScore').textContent = `Score: ${this.currentUser.score || 0}`;
-                document.getElementById('completedTopics').textContent = `${this.currentUser.completedTopics || 0}/8`;
+                
+                const userTopics = this.getUserTopics();
+                const completedTopics = userTopics.filter(topic => topic.completed).length;
+                document.getElementById('completedTopics').textContent = `${completedTopics}/8`;
+                
                 document.getElementById('practiceScore').textContent = this.currentUser.score || 0;
                 document.getElementById('studyStreak').textContent = `${this.currentUser.streak || 0} days`;
 
-                const progress = ((this.currentUser.completedTopics || 0) / 8) * 100;
+                const progress = (completedTopics / 8) * 100;
                 document.getElementById('topicProgress').style.width = `${progress}%`;
                 document.getElementById('userProgress').textContent = `${Math.round(progress)}% Complete`;
             }
@@ -1659,32 +1707,6 @@
                 return null;
             }
         }
-        function getUserFromStorage(emailOrUsername, password) {
-            const usersData = localStorage.getItem('discmath_users') || '[]';
-            let users;
-            try {
-                users = JSON.parse(usersData);
-                // Ensure users is an array
-                if (!Array.isArray(users)) {
-                    users = [];
-                }
-            } catch (error) {
-                console.error('Error parsing users data in getUserFromStorage:', error);
-                users = [];
-            }
-            return users.find(user =>
-                (user.email === emailOrUsername || user.username === emailOrUsername) &&
-                user.password === password
-            );
-        }
-
-        function setCurrentUser(userData) {
-            localStorage.setItem('discmath_current_user', JSON.stringify(userData));
-        }
-
-        function getCurrentUser() {
-            return JSON.parse(localStorage.getItem('discmath_current_user') || 'null');
-        }
 
         function handleSignUp(event) {
             console.log('handleSignUp called - START');
@@ -1810,7 +1832,8 @@
                 createdAt: new Date().toISOString(),
                 streak: 0,
                 completedTopics: 0,
-                totalScore: 0
+                totalScore: 0,
+                score: 0
             };
 
             console.log('User data created:', userData);
@@ -1829,6 +1852,10 @@
             if (!dataStore.userActivities.has(emailVal)) {
                 dataStore.userActivities.set(emailVal, []);
             }
+
+            // UPDATE UI AND ACTIVITIES FOR THE CURRENT USER
+            dataStore.updateUI();
+            dataStore.updateRecentActivity();
 
             // Save to dataStore storage
             dataStore.saveToStorage();
@@ -1923,6 +1950,10 @@
                 dataStore.userActivities.set(user.email, []);
             }
 
+            // UPDATE UI AND ACTIVITIES FOR THE CURRENT USER
+            dataStore.updateUI();
+            dataStore.updateRecentActivity();
+
             showMessage(`Welcome back, ${user.firstName || user.name}!`, 'success');
             closeSignIn();
 
@@ -1941,7 +1972,7 @@
             document.getElementById('landingPage').style.display = '';
             document.getElementById('dashboardPage').style.display = '';
 
-            // Ensure UI is properly updated
+            // UPDATE UI AND ACTIVITIES FOR THE CURRENT USER
             if (dataStore.currentUser) {
                 dataStore.updateUI();
                 dataStore.updateRecentActivity();
@@ -1951,94 +1982,6 @@
             loadTopics();
             loadFormulas();
             loadPracticeTopics();
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-
-            const nameInput = event.target.querySelector('input[type="text"]');
-            const emailInput = event.target.querySelector('input[type="email"]');
-            const submitButton = event.target.querySelector('button[type="submit"]');
-
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-
-            // Clear previous error states
-            nameInput.classList.remove('border-red-500');
-            emailInput.classList.remove('border-red-500');
-
-            // Validation
-            let hasErrors = false;
-
-            if (!name || name.length < 2) {
-                nameInput.classList.add('border-red-500');
-                showMessage('Please enter a valid name (at least 2 characters)', 'error');
-                hasErrors = true;
-            }
-
-            if (!email || !isValidEmail(email)) {
-                emailInput.classList.add('border-red-500');
-                showMessage('Please enter a valid email address', 'error');
-                hasErrors = true;
-            }
-
-            if (hasErrors) return;
-
-            // Show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = `
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Signing In...
-            `;
-
-            // Simulate authentication process
-            setTimeout(() => {
-                try {
-                    // Check if user already exists
-                    const existingUser = dataStore.users.get(email);
-
-                    if (existingUser) {
-                        // Returning user
-                        dataStore.currentUser = existingUser;
-                        dataStore.currentUser.name = name; // Update name in case it changed
-                        dataStore.updateUI();
-                        dataStore.updateRecentActivity();
-                        showMessage(`Welcome back, ${name}!`, 'success');
-                    } else {
-                        // New user
-                        dataStore.setUser({ name, email });
-                        showMessage(`Welcome to DiscMath Companion, ${name}!`, 'success');
-                    }
-
-                    // Reset form
-                    event.target.reset();
-
-                    // Close modal and show dashboard
-                    closeLogin();
-                    showDashboard();
-
-                } catch (error) {
-                    showMessage('Sign in failed. Please try again.', 'error');
-                } finally {
-                    // Reset button state
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = 'Sign In';
-                }
-            }, 1500); // Simulate network delay
-        }
-
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function continueAsGuest() {
-            closeLogin(); // Ensure modal is closed
-            dataStore.setUser({ name: 'Guest User', email: 'guest@example.com' });
-            showDashboard();
         }
 
         function logout() {
@@ -2066,13 +2009,13 @@
             loadTopics();
             loadFormulas();
             loadPracticeTopics();
-            dataStore.updateRecentActivity(); // Ensure recent activity is up-to-date
+            dataStore.updateRecentActivity();
         }
 
         // Navigation
         function showPage(pageName) {
             // Hide all content
-            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent', 'progressContent'];
             contents.forEach(content => {
                 document.getElementById(content).classList.add('hidden');
             });
@@ -2106,6 +2049,8 @@
                 loadFormulas();
             } else if (pageName === 'practice') {
                 loadPracticeTopics();
+            } else if (pageName === 'progress') {
+                updateProgressDashboard();
             } else if (pageName === 'profile' && dataStore.currentUser) {
                 loadProfileData();
             }
@@ -2116,15 +2061,15 @@
             if (!dataStore.currentUser) return;
 
             const user = dataStore.currentUser;
-            
+
             // Format join date
-            const joinDate = user.createdAt ? 
-                new Date(user.createdAt).toISOString().split('T')[0] : 
+            const joinDate = user.createdAt ?
+                new Date(user.createdAt).toISOString().split('T')[0] :
                 new Date().toISOString().split('T')[0];
 
             // Get display name (use firstName + lastName if available, otherwise fallback to name)
-            const displayName = user.firstName && user.lastName ? 
-                `${user.firstName} ${user.lastName}` : 
+            const displayName = user.firstName && user.lastName ?
+                `${user.firstName} ${user.lastName}` :
                 user.name || 'User';
 
             // Update profile display elements
@@ -2132,7 +2077,7 @@
             document.getElementById('profileDisplayEmail').textContent = user.email;
             document.getElementById('profileJoinDate').textContent = joinDate;
             document.getElementById('profileInitial').textContent = displayName.charAt(0).toUpperCase();
-            
+
             // Update form fields
             document.getElementById('profileName').value = displayName;
             document.getElementById('profileEmail').value = user.email;
@@ -2140,8 +2085,11 @@
 
         // Load topics
         function loadTopics() {
+            if (!dataStore.currentUser) return;
+            
+            const userTopics = dataStore.getUserTopics();
             const container = document.getElementById('topicsList');
-            container.innerHTML = dataStore.topics.map(topic => `
+            container.innerHTML = userTopics.map(topic => `
                 <div class="card topic-card p-6">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex-1">
@@ -2200,7 +2148,8 @@
             const container = document.getElementById('practiceTopics');
             if (!container) return;
 
-            container.innerHTML = dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).map(topic => `
+            const userTopics = dataStore.getUserTopics();
+            container.innerHTML = userTopics.filter(topic => topic.problems && topic.problems.length > 0).map(topic => `
         <button onclick="startPractice(${topic.id})" class="card p-6 text-left hover:scale-105 transition-all duration-300">
             <div class="flex items-center justify-between mb-4">
                 <h4 class="font-semibold text-gray-900 text-lg">${topic.name}</h4>
@@ -2219,7 +2168,7 @@
     `).join('');
 
             // If no practice topics available, show message
-            if (dataStore.topics.filter(topic => topic.problems && topic.problems.length > 0).length === 0) {
+            if (userTopics.filter(topic => topic.problems && topic.problems.length > 0).length === 0) {
                 container.innerHTML = `
             <div class="col-span-2 text-center py-12">
                 <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
@@ -2236,18 +2185,20 @@
 
         // Learning function
         function learnTopic(topicId) {
-            const topic = dataStore.topics.find(t => t.id === topicId);
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === topicId);
             if (!topic || !topic.learningContent) {
                 showMessage('Learning content for this topic is coming soon!', 'info');
                 return;
             }
 
+            dataStore.markTopicViewed(topicId);
             showLearningContent(topic);
         }
 
         function showLearningContent(topic) {
             // Hide all content sections
-            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
+            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent', 'progressContent'];
             contents.forEach(content => {
                 document.getElementById(content).classList.add('hidden');
             });
@@ -2342,7 +2293,8 @@
 
         // Practice functions
         function startTopicPractice(topicId) {
-            const topic = dataStore.topics.find(t => t.id === topicId);
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === topicId);
             if (topic.problems.length > 0) {
                 showPage('practice');
                 startPractice(topicId);
@@ -2354,7 +2306,8 @@
         function startPractice(topicId) {
             console.log('Starting practice for topic:', topicId);
 
-            const topic = dataStore.topics.find(t => t.id === topicId);
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === topicId);
             if (!topic) {
                 console.error('Topic not found:', topicId);
                 showMessage('Topic not found!', 'error');
@@ -2386,7 +2339,8 @@
                 return;
             }
 
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === currentPractice.topicId);
             if (!topic || !topic.problems || topic.problems.length === 0) {
                 console.error('Topic or problems not found for topic ID:', currentPractice.topicId);
                 showMessage('Practice problems not available for this topic.', 'error');
@@ -2438,19 +2392,9 @@
             console.log('Question displayed successfully');
         }
 
-        function nextQuestion() {
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-
-            currentPractice.currentQuestion++;
-            if (currentPractice.currentQuestion < topic.problems.length) {
-                showQuestion();
-            } else {
-                finishPractice();
-            }
-        }
-
         function selectAnswer(selectedIndex) {
-            const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === currentPractice.topicId);
             const question = topic.problems[currentPractice.currentQuestion];
             const isCorrect = selectedIndex === question.correct;
 
@@ -2496,20 +2440,33 @@
             }
         }
 
+        function nextQuestion() {
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === currentPractice.topicId);
+
+            currentPractice.currentQuestion++;
+            if (currentPractice.currentQuestion < topic.problems.length) {
+                showQuestion();
+            } else {
+                finishPractice();
+            }
+        }
+
         function finishPractice() {
-    const topic = dataStore.topics.find(t => t.id === currentPractice.topicId);
-    const totalQuestions = topic.problems.length;
-    const correctAnswers = currentPractice.answers.filter((answer, index) =>
-        answer === topic.problems[index].correct
-    ).length;
+            const userTopics = dataStore.getUserTopics();
+            const topic = userTopics.find(t => t.id === currentPractice.topicId);
+            const totalQuestions = topic.problems.length;
+            const correctAnswers = currentPractice.answers.filter((answer, index) =>
+                answer === topic.problems[index].correct
+            ).length;
 
-    // Calculate final score (10 points per correct answer)
-    const finalScore = correctAnswers * 10;
+            // Calculate final score (10 points per correct answer)
+            const finalScore = correctAnswers * 10;
 
-    // Update user progress and score
-    dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
+            // Update user progress and score
+            dataStore.completeTopicProblem(currentPractice.topicId, finalScore);
 
-    document.getElementById('practiceArea').innerHTML = `
+            document.getElementById('practiceArea').innerHTML = `
         <div class="text-center max-w-md mx-auto">
             <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r ${correctAnswers === totalQuestions ? 'from-green-400 to-blue-500' : 'from-purple-400 to-pink-500'} rounded-full flex items-center justify-center">
                 <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2535,44 +2492,10 @@
         </div>
     `;
 
-    currentPractice = null;
-}
-
-        function manualBackToTopics() {
-            console.log('Manual back to topics page');
-
-            // Hide all content sections
-            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'profileContent'];
-            contents.forEach(content => {
-                const element = document.getElementById(content);
-                if (element) {
-                    element.classList.add('hidden');
-                }
-            });
-
-            // Show TOPICS content (not practice)
-            const topicsContent = document.getElementById('topicsContent');
-            if (topicsContent) {
-                topicsContent.classList.remove('hidden');
-            }
-
-            // Load the topics (this will show the learning topics)
-            loadTopics();
-
-            // Update page info to show Topics page
-            document.getElementById('pageTitle').textContent = 'Learning Topics';
-            document.getElementById('pageSubtitle').textContent = 'Explore discrete mathematics concepts';
-
-            // Update sidebar to highlight Topics
-            document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[onclick="showPage(\'topics\')"]').classList.add('active');
-
-            console.log('Manual back to topics page completed');
+            currentPractice = null;
         }
 
-        // Profile functions (now uses the updated method in DataStore)
+        // Profile functions
         function updateProfile() {
             if (!dataStore.currentUser) return;
 
@@ -2620,61 +2543,15 @@
             showMessage('Recent activity cleared!', 'success');
         }
 
-        // Utility functions
-        function showMessage(message, type = 'info') {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white font-medium z-50 ${type === 'success' ? 'success-message' :
-                type === 'error' ? 'error-message' :
-                    'bg-blue-500'
-                }`;
-            messageDiv.textContent = message;
-
-            document.body.appendChild(messageDiv);
-
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 3000);
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('loginModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeLogin();
-            }
-        });
-
-        // Toggle password visibility
-        function togglePasswordVisibility(inputId, iconId) {
-            const passwordInput = document.getElementById(inputId);
-            const eyeIcon = document.getElementById(iconId);
-
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                // Change to eye-off icon
-                eyeIcon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
-                `;
-                eyeIcon.classList.add('rotate-12');
-            } else {
-                passwordInput.type = 'password';
-                // Change back to eye icon
-                eyeIcon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                `;
-                eyeIcon.classList.remove('rotate-12');
-            }
-        }
-
-
         // Progress tracking functions
         function updateProgressDashboard() {
             if (!dataStore.currentUser) return;
 
             const user = dataStore.currentUser;
-            const totalTopics = dataStore.topics.length;
-            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
-            const startedTopics = dataStore.topics.filter(topic => topic.viewed).length;
+            const userTopics = dataStore.getUserTopics();
+            const totalTopics = userTopics.length;
+            const completedTopics = userTopics.filter(topic => topic.completed).length;
+            const startedTopics = userTopics.filter(topic => topic.viewed).length;
             const progressPercent = Math.round((completedTopics / totalTopics) * 100);
 
             // Update overall progress
@@ -2737,6 +2614,7 @@
             document.getElementById('learningTime').textContent = `${learningHours.toFixed(1)}h`;
 
             // Update progress bars
+            document.getElementById('topicsStartedBar').style.width = `${(started / total) * 100}%`;
             document.getElementById('topicsCompletedBar').style.width = `${(completed / total) * 100}%`;
             document.getElementById('problemsSolvedBar').style.width = `${Math.min(100, (problemsSolved / 50) * 100)}%`;
             document.getElementById('learningTimeBar').style.width = `${Math.min(100, (learningHours / 20) * 100)}%`;
@@ -2746,8 +2624,8 @@
             const user = dataStore.currentUser;
             if (!user || user.score === 0) return 0;
 
-            // Estimate accuracy based on score and completed topics
-            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
+            const userTopics = dataStore.getUserTopics();
+            const completedTopics = userTopics.filter(topic => topic.completed).length;
             const maxPossibleScore = completedTopics * 50;
 
             if (maxPossibleScore === 0) return 0;
@@ -2757,9 +2635,11 @@
 
         function updateTopicsProgress() {
             const container = document.getElementById('topicsProgressList');
-            if (!container) return;
+            if (!container || !dataStore.currentUser) return;
 
-            container.innerHTML = dataStore.topics.map(topic => {
+            const userTopics = dataStore.getUserTopics();
+            
+            container.innerHTML = userTopics.map(topic => {
                 const statusClass = topic.completed ? 'completed' :
                     topic.viewed ? 'in-progress' : 'not-started';
                 const statusText = topic.completed ? 'Completed' :
@@ -2794,11 +2674,12 @@
 
         function updateAchievements() {
             const container = document.getElementById('achievementsList');
-            if (!container) return;
+            if (!container || !dataStore.currentUser) return;
 
             const user = dataStore.currentUser;
-            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
-            const totalTopics = dataStore.topics.length;
+            const userTopics = dataStore.getUserTopics();
+            const completedTopics = userTopics.filter(topic => topic.completed).length;
+            const totalTopics = userTopics.length;
 
             const achievements = [
                 {
@@ -2877,12 +2758,13 @@
             if (!container) return;
 
             const user = dataStore.currentUser;
-            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
-            const totalTopics = dataStore.topics.length;
+            const userTopics = dataStore.getUserTopics();
+            const completedTopics = userTopics.filter(topic => topic.completed).length;
+            const totalTopics = userTopics.length;
 
             const milestones = [
-                { name: 'Complete Set Theory', completed: dataStore.topics[0]?.completed },
-                { name: 'Complete Logic & Proofs', completed: dataStore.topics[1]?.completed },
+                { name: 'Complete Set Theory', completed: userTopics[0]?.completed },
+                { name: 'Complete Logic & Proofs', completed: userTopics[1]?.completed },
                 { name: 'Score 500 Points', completed: (user.score || 0) >= 500 },
                 { name: '3-Day Streak', completed: (user.streak || 0) >= 3 },
                 { name: 'Complete All Topics', completed: completedTopics === totalTopics }
@@ -2908,8 +2790,9 @@
             if (!dataStore.currentUser) return;
 
             const user = dataStore.currentUser;
-            const completedTopics = dataStore.topics.filter(topic => topic.completed).length;
-            const totalTopics = dataStore.topics.length;
+            const userTopics = dataStore.getUserTopics();
+            const completedTopics = userTopics.filter(topic => topic.completed).length;
+            const totalTopics = userTopics.length;
             const progressPercent = Math.round((completedTopics / totalTopics) * 100);
 
             const report = `
@@ -2929,14 +2812,14 @@ Accuracy Rate: ${calculateAccuracy()}%
 
 TOPICS PROGRESS
 ---------------
-${dataStore.topics.map(topic =>
+${userTopics.map(topic =>
                 `${topic.completed ? '✓' : topic.viewed ? '→' : '○'} ${topic.name} - ${topic.completed ? 'Completed' : topic.viewed ? 'In Progress' : 'Not Started'}`
             ).join('\n')}
 
 ACHIEVEMENTS
 ------------
-${dataStore.topics.filter(t => t.completed).length >= 1 ? '✓ First Steps - Complete your first topic' : '○ First Steps'}
-${dataStore.topics.filter(t => t.completed).length >= totalTopics / 2 ? '✓ Halfway There - Complete 50% of topics' : '○ Halfway There'}
+${userTopics.filter(t => t.completed).length >= 1 ? '✓ First Steps - Complete your first topic' : '○ First Steps'}
+${userTopics.filter(t => t.completed).length >= totalTopics / 2 ? '✓ Halfway There - Complete 50% of topics' : '○ Halfway There'}
 ${(user.score || 0) >= 1000 ? '✓ Practice Master - Score 1000+ points' : '○ Practice Master'}
 ${(user.streak || 0) >= 7 ? '✓ Consistent Learner - 7-day study streak' : '○ Consistent Learner'}
 
@@ -2957,47 +2840,54 @@ Keep up the great work! Continue your discrete mathematics journey.
             showMessage('Progress report exported successfully!', 'success');
         }
 
-        // Update the showPage function to handle progress page
-        function showPage(pageName) {
-            // Hide all content
-            const contents = ['dashboardContent', 'topicsContent', 'formulasContent', 'practiceContent', 'progressContent', 'profileContent'];
-            contents.forEach(content => {
-                document.getElementById(content).classList.add('hidden');
-            });
+        // Utility functions
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white font-medium z-50 ${type === 'success' ? 'success-message' :
+                type === 'error' ? 'error-message' :
+                    'bg-blue-500'
+                }`;
+            messageDiv.textContent = message;
 
-            // Also hide learning content if it exists
-            const learningContainer = document.getElementById('learningContent');
-            if (learningContainer) {
-                learningContainer.classList.add('hidden');
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeLogin();
             }
+        });
 
-            // Show selected content
-            document.getElementById(pageName + 'Content').classList.remove('hidden');
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(iconId);
 
-            // Update page info
-            const info = pageInfo[pageName];
-            document.getElementById('pageTitle').textContent = info.title;
-            document.getElementById('pageSubtitle').textContent = info.subtitle;
-
-            // Update sidebar
-            document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector(`[onclick="showPage('${pageName}')"]`).classList.add('active');
-
-            currentPage = pageName;
-
-            // Load content based on the page
-            if (pageName === 'topics') {
-                loadTopics();
-            } else if (pageName === 'formulas') {
-                loadFormulas();
-            } else if (pageName === 'practice') {
-                loadPracticeTopics();
-            } else if (pageName === 'progress') {
-                updateProgressDashboard();
-            } else if (pageName === 'profile' && dataStore.currentUser) {
-                loadProfileData();
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Change to eye-off icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                `;
+                eyeIcon.classList.add('rotate-12');
+            } else {
+                passwordInput.type = 'password';
+                // Change back to eye icon
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                `;
+                eyeIcon.classList.remove('rotate-12');
             }
         }
 
@@ -3051,4 +2941,3 @@ Keep up the great work! Continue your discrete mathematics journey.
 </body>
 
 </html>
-
